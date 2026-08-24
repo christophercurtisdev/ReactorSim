@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import Game from '../Core/Game';
+import FuelRodSwitchComponent from './FuelRodSwitchComponent';
 
-const FuelArraySwitchesComponent: React.FC = () => {
+export default function FuelArraySwitchesComponent() {
     let fuelRods = Game.getInstance().getFuelArray().fuelRods;
     return (
-        <div>
-            <div className='grid gap-1 grid-cols-50'>
-                {fuelRods.map((column) => (
-                    column.map((rod, index) => (
-                        <div key={'rod'+index} className="border">{rod.fuelType}</div>
+        <div className='overflow-scroll h-full'>
+            <div className='grid gap-1 grid-flow-col grid-rows-5'>
+                {fuelRods.map((column, columnIndex) => (
+                    column.map((rod, rowIndex) => (
+                        // <label key={'rod'+(rowIndex * (columnIndex + 1))} className="switch">
+                        //     <input className="fuel-rod-checkbox" type="checkbox" />
+                        //     <span className="toggle">
+                        //         <span className="left">{rowIndex + (column.length * (columnIndex)) + 1}</span>
+                        //         <span className="right green">&#8226;</span>
+                        //     </span>
+                        // </label>
+                        <FuelRodSwitchComponent fuelRod={rod} />
                     ))
                 ))}
             </div>
         </div>
     );
 }
-
-export default FuelArraySwitchesComponent;

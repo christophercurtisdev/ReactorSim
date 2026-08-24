@@ -11,7 +11,7 @@
 }
 
 /* Hide default HTML checkbox */
-.switch .cb {
+.switch .fuel-rod-checkbox {
     opacity: 0;
     width: 0;
     height: 0;

@@ -1,7 +1,8 @@
 import FuelTypes from "../../Core/TypeLists/FuelTypes";
-import type { TemperatureSensitivity } from "../Interfaces/TemperatureSensitivityInterface";
+import type TemperatureSensitivity from "../Interfaces/TemperatureSensitivityInterface";
 
 class FuelRod implements TemperatureSensitivity {
+    label: string;
     temperature: number;
     minimumTemperature: number;
     maximumTemperature: number;
@@ -11,7 +12,12 @@ class FuelRod implements TemperatureSensitivity {
         this.temperature = 0;
         this.minimumTemperature = 0;
         this.maximumTemperature = 0;
-        (FuelTypes.ALL.includes(fuelType)) ? this.fuelType = fuelType : this.fuelType = null;
+        if(FuelTypes.ALL.includes(fuelType)) {
+            this.fuelType = fuelType
+            this.label = fuelType.substring(0,1);
+        } else {
+            this.fuelType = null;
+        }
     }
 
     onExceedMaximumTemperature(): void {

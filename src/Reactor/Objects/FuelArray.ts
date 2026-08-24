@@ -1,4 +1,4 @@
-import type { TemperatureSensitivity } from "../Interfaces/TemperatureSensitivityInterface";
+import type TemperatureSensitivity from "../Interfaces/TemperatureSensitivityInterface";
 import FuelRod from "./FuelRod";
 
 class FuelArray implements TemperatureSensitivity {

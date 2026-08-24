@@ -1,4 +1,4 @@
-export interface TemperatureSensitivity {
+export default interface TemperatureSensitivity {
     temperature: number;
     minimumTemperature: number;
     maximumTemperature: number;

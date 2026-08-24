@@ -3,7 +3,7 @@ import TickSystem from '../Core/TickSystem';
 import Game from '../Core/Game';
 import FuelArraySwitchesComponent from './FuelArraySwitchesComponent';
 
-const GameComponent: React.FC = () => {
+export default function GameComponent() {
   const [inputLocked, setInputLocked] = useState(false);
 
   useEffect(() => {
@@ -40,15 +40,7 @@ const GameComponent: React.FC = () => {
       <div className='border col-span-8 row-span-2'>
         <FuelArraySwitchesComponent />
       </div>
-      <div className='border'>
-        <label className="switch">
-            <input className="cb" type="checkbox" id="A1" />
-            <span className="toggle">
-                <span className="left">A1</span>
-                <span className="right green">&#8226;</span>
-            </span>
-        </label>
-      </div>
+      <div className='border'>Text</div>
       <div className='border'>Text</div>
       <div className='border'>Text</div>
       <div className='border'>Text</div>
@@ -68,5 +60,3 @@ const GameComponent: React.FC = () => {
     </div>
   );
 };
-
-export default GameComponent;

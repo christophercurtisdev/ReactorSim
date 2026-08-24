@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TickSystem from '../Core/TickSystem';
 
-const TickDebugComponent: React.FC = () => {
+export default function TickDebugComponent() {
   const [tickCount, setTickCount] = useState(0);
   const [ticksRunning, setTicksRunning] = useState(true);
 
@@ -35,5 +35,3 @@ const TickDebugComponent: React.FC = () => {
     </div>
   );
 };
-
-export default TickDebugComponent;
