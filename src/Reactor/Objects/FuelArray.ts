@@ -5,6 +5,7 @@ class FuelArray implements TemperatureSensitivity {
     temperature: number;
     minimumTemperature: number;
     maximumTemperature: number;
+    mass: number;
 
     fuelRods: Array<Array<FuelRod>> = [];
 
@@ -15,6 +16,7 @@ class FuelArray implements TemperatureSensitivity {
         this.temperature = 0;
         this.minimumTemperature = 0;
         this.maximumTemperature = 0;
+        this.mass = 0;
         
         this.rows = 10;
         this.columns = 10;
@@ -58,7 +60,8 @@ class FuelArray implements TemperatureSensitivity {
     fillWith(fuelType: string = null) {
         for(let column = 0; column < this.columns; column ++) {
             for(let row = 0; row < this.rows; row++) {
-                this.fuelRods[column][row] = new FuelRod(fuelType);
+                let rodNumber = (column * this.rows) + row;
+                this.fuelRods[column][row] = new FuelRod(fuelType, rodNumber);
             }
         }
     }

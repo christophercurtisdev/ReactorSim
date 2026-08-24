@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import TickSystem from '../Core/TickSystem';
 
 export default function TickDebugComponent() {
@@ -16,7 +16,7 @@ export default function TickDebugComponent() {
       setTickCount(currentTick);
     });
 
-    // Subscribe to tick updates
+    // Subscribe to tick start and stop events
     const unsubscribeFromStopStartUpdates = tickSystem.subscribeToStopStartEvents((isRunning) => {
       setTicksRunning(isRunning);
     });

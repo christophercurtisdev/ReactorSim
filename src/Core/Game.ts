@@ -1,4 +1,5 @@
 import FuelArray from "../Reactor/Objects/FuelArray";
+import TickSystem from "./TickSystem";
 import FuelTypes from "./TypeLists/FuelTypes";
 
 class Game {
@@ -11,7 +12,7 @@ class Game {
     private constructor() {
         // Maybe move reactor components to dedicated Reactor object if Game gets too big
         this.fuelArray = new FuelArray();
-        this.fuelArray.fillWith(FuelTypes.URANIUM235);
+        this.fuelArray.fillWith(FuelTypes.PLUTONIUM);
 
         this.powerGenerated = 0;
         this.radiation = 0;
@@ -41,8 +42,12 @@ class Game {
 
     }
 
-    play() {
+    resume() {
 
+    }
+
+    start() {
+        TickSystem.getInstance().start();
     }
 
     getFuelArray(): FuelArray {

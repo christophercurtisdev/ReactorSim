@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import FuelRod from '../Reactor/Objects/FuelRod';
 
 export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {

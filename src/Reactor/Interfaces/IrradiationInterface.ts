@@ -1,4 +1,4 @@
-export interface Irradiation {
+export default interface Irradiation {
     roentgen: number;
     maximumRoentgen: number;
     onEsceedMaximumRoentgen(): void;

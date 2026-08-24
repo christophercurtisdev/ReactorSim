@@ -5,9 +5,9 @@
     position: relative;
     display: inline-block;
     width: 5em;
-    height: 2.5em;
+    height: 2em;
     user-select: none;
-    margin: 1rem 2rem 1rem 1rem;
+    margin: 1rem;
 }
 
 /* Hide default HTML checkbox */

@@ -6,17 +6,24 @@ class FuelRod implements TemperatureSensitivity {
     temperature: number;
     minimumTemperature: number;
     maximumTemperature: number;
-    fuelType: string;
+    mass: number;
 
-    constructor(fuelType: string = null) {
+    fuelType: string;
+    rodNumber: number;
+
+    constructor(fuelType: string = null, rodNumber: number = 0) {
         this.temperature = 0;
         this.minimumTemperature = 0;
         this.maximumTemperature = 0;
+        this.mass = 0;
+        
         if(FuelTypes.ALL.includes(fuelType)) {
             this.fuelType = fuelType
-            this.label = fuelType.substring(0,1);
+            this.rodNumber = rodNumber;
+            this.label = fuelType.substring(0,1) + this.rodNumber;
         } else {
             this.fuelType = null;
+            this.label = null;
         }
     }
 
