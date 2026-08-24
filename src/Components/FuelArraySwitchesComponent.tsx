@@ -4,7 +4,7 @@ import FuelRodSwitchComponent from './FuelRodSwitchComponent';
 export default function FuelArraySwitchesComponent() {
     let fuelRods = Game.getInstance().getFuelArray().fuelRods;
     return (
-        <div className='grid grid-flow-col grid-rows-5'>
+        <div className='grid grid-flow-col grid-rows-5 content-center'>
             {fuelRods.map((column) => (
                 column.map((rod) => (
                     <FuelRodSwitchComponent fuelRod={rod} />

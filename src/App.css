@@ -7,7 +7,7 @@
     width: 5em;
     height: 2em;
     user-select: none;
-    margin: 1rem;
+    margin: 0.2rem 0.4rem;
 }
 
 /* Hide default HTML checkbox */
@@ -116,13 +116,30 @@
 
 .switch input:checked+.toggle>.right {
     transform: rotateX(10deg) rotateY(0deg);
-    color: #ff0000;
-    text-shadow: rgb(0, 0, 0) 0 0 2px, rgb(255, 0, 0) 0 0 9px, rgb(255,255,255) 0 0 15px;
     background-color: #484848;
 }
 
 .switch input:checked+.toggle>.right.green {
     color: #00FF00;
     text-shadow: rgb(0, 0, 0) 0 0 2px, rgb(0, 255, 0) 0 0 9px, rgb(255,255,255) 0 0 15px;
-    background-color: #484848;
+}
+
+.switch input:checked+.toggle>.right.yellow {
+    color: #FFFF00;
+    text-shadow: rgb(0, 0, 0) 0 0 2px, rgb(255, 255, 0) 0 0 9px, rgb(255,255,255) 0 0 15px;
+}
+
+.switch input:checked+.toggle>.right.red {
+    color: #FF0000;
+    text-shadow: rgb(0, 0, 0) 0 0 2px, rgb(255, 0, 0) 0 0 9px, rgb(255,255,255) 0 0 15px;
+}
+
+.switch input:checked+.toggle>.right.blue {
+    color: #8c8cff;
+    text-shadow: rgb(0, 0, 0) 0 0 2px, rgb(150, 150, 255) 0 0 9px, rgb(255,255,255) 0 0 15px;
+}
+
+.switch input:checked+.toggle>.right.white {
+    color: #FFFFFF;
+    text-shadow: rgb(0, 0, 0) 0 0 2px, rgb(255,255,255) 0 0 9px, rgb(255,255,255) 0 0 15px;
 }

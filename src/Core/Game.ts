@@ -12,7 +12,7 @@ class Game {
     private constructor() {
         // Maybe move reactor components to dedicated Reactor object if Game gets too big
         this.fuelArray = new FuelArray();
-        this.fuelArray.fillWith(FuelTypes.PLUTONIUM);
+        this.fuelArray.fillWith(FuelTypes.GRAPHITE);
 
         this.powerGenerated = 0;
         this.radiation = 0;

@@ -13,6 +13,26 @@ class FuelTypes {
         let random = Math.floor(Math.random() * (FuelTypes.ALL.length + 1));
         return FuelTypes.ALL[random];
     }
+
+    public static COLOUR(fuelType: string): string | null {
+        if (!FuelTypes.isValidFuelType(fuelType)) {
+            return null
+        }
+        switch (fuelType) {
+            case FuelTypes.URANIUM235:
+                return 'green';
+            case FuelTypes.PLUTONIUM:
+                return 'yellow';
+            case FuelTypes.THORIUM:
+                return 'blue';
+            case FuelTypes.GRAPHITE:
+                return 'white'
+        }
+    }
+
+    public static isValidFuelType(fuelType: string) {
+        return FuelTypes.ALL.includes(fuelType);
+    }
 }
 
 export default FuelTypes;

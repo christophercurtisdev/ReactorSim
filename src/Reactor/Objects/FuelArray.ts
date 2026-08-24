@@ -18,8 +18,8 @@ class FuelArray implements TemperatureSensitivity {
         this.maximumTemperature = 0;
         this.mass = 0;
         
-        this.rows = 10;
-        this.columns = 10;
+        this.rows = 5;
+        this.columns = 5;
 
         for(let column = 0; column < this.columns; column ++) {
             this.fuelRods[column] = new Array<FuelRod>();
