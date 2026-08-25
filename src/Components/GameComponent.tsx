@@ -3,6 +3,7 @@ import TickSystem from '../Core/TickSystem';
 import Game from '../Core/Game';
 import FuelArraySwitchesComponent from './FuelArraySwitchesComponent';
 import MenuButtonsComponent from './MenuButtonsComponent';
+import AnimationScreen from './AnimationScreenComponent';
 
 export default function GameComponent() {
   const [inputLocked, setInputLocked] = useState(false);
@@ -40,7 +41,9 @@ export default function GameComponent() {
       <div className='border col-span-32 row-span-14 overflow-x-scroll overflow-y-scroll'>
         <FuelArraySwitchesComponent />
       </div>
-      <div className="border row-span-16 col-span-16">Screen for current queued action</div>
+      <div className="border row-span-16 col-span-16">
+        <AnimationScreen />
+      </div>
       <div className="border row-span-4 col-span-32">Power generated / Power required this round</div>
       <div className="border row-span-16 col-span-8">Queued actions</div>
       <div className="border row-span-8 col-span-8">Vent</div>

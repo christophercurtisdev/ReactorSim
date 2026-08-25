@@ -1,5 +1,11 @@
+import SoftRecessButton from "./SoftRecessButtonComponent";
+
 export default function MenuButtonsComponent() {
     return (
-        <div>test</div>
+        <div>
+            <SoftRecessButton />
+            <SoftRecessButton />
+            <SoftRecessButton />
+        </div>
     );
 }

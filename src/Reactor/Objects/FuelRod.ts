@@ -1,12 +1,16 @@
-import FuelTypes from "../../Core/TypeLists/FuelTypes";
+import FuelType from "../../Core/TypeLists/FuelType";
+import type Irradiation from "../Interfaces/IrradiationInterface";
 import type TemperatureSensitivity from "../Interfaces/TemperatureSensitivityInterface";
 
-class FuelRod implements TemperatureSensitivity {
+class FuelRod implements TemperatureSensitivity, Irradiation {
     label: string;
     temperature: number;
     minimumTemperature: number;
     maximumTemperature: number;
     mass: number;
+
+    roentgen: number;
+    maximumRoentgen: number;
 
     fuelType: string;
     rodNumber: number;
@@ -17,7 +21,7 @@ class FuelRod implements TemperatureSensitivity {
         this.maximumTemperature = 0;
         this.mass = 0;
 
-        if(FuelTypes.isValidFuelType(fuelType)) {
+        if(FuelType.isValidFuelType(fuelType)) {
             this.fuelType = fuelType
             this.rodNumber = rodNumber;
             this.label = fuelType.substring(0,1) + this.rodNumber;
@@ -27,12 +31,16 @@ class FuelRod implements TemperatureSensitivity {
         }
     }
 
+    onEsceedMaximumRoentgen(): void {
+        console.log("Roentgen Exceeded in Fuel Rod");
+    }
+
     onExceedMaximumTemperature(): void {
-        
+        console.log("Max Temp Exceeded in Fuel Rod");
     }
 
     onExceedMinimumTemperature(): void {
-        
+        console.log("Min Temo Exceeded in Fuel Rod");
     }
 
     updateTemperature(): void {

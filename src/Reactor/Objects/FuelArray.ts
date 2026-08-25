@@ -1,3 +1,4 @@
+import FuelType from "../../Core/TypeLists/FuelType";
 import type TemperatureSensitivity from "../Interfaces/TemperatureSensitivityInterface";
 import FuelRod from "./FuelRod";
 
@@ -61,7 +62,9 @@ class FuelArray implements TemperatureSensitivity {
         for(let column = 0; column < this.columns; column ++) {
             for(let row = 0; row < this.rows; row++) {
                 let rodNumber = (column * this.rows) + row;
-                this.fuelRods[column][row] = new FuelRod(fuelType, rodNumber);
+                let validatedFuelType = fuelType ?? FuelType.ALL[Math.floor(Math.random() * FuelType.ALL.length)];
+                this.fuelRods[column][row] = new FuelRod(validatedFuelType, rodNumber);
+                this.fuelRods[column][row].label = String(column) + String(row) + validatedFuelType.substring(0,1);
             }
         }
     }

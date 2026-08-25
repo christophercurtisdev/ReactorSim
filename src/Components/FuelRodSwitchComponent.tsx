@@ -1,8 +1,8 @@
-import FuelTypes from '../Core/TypeLists/FuelTypes';
+import FuelType from '../Core/TypeLists/FuelType';
 import FuelRod from '../Reactor/Objects/FuelRod';
 
 export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
-    let switchLedClass = 'right '+FuelTypes.COLOUR(fuelRod.fuelType);
+    let switchLedClass = 'right '+FuelType.COLOUR(fuelRod.fuelType);
     return (
         <div className='flex'>
             <label className="switch">

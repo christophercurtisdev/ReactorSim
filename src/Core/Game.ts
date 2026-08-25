@@ -1,6 +1,6 @@
 import FuelArray from "../Reactor/Objects/FuelArray";
 import TickSystem from "./TickSystem";
-import FuelTypes from "./TypeLists/FuelTypes";
+import FuelType from "./TypeLists/FuelType";
 
 class Game {
     private static instance: Game | null = null;
@@ -12,7 +12,7 @@ class Game {
     private constructor() {
         // Maybe move reactor components to dedicated Reactor object if Game gets too big
         this.fuelArray = new FuelArray();
-        this.fuelArray.fillWith(FuelTypes.GRAPHITE);
+        this.fuelArray.fillWith();
 
         this.powerGenerated = 0;
         this.radiation = 0;
