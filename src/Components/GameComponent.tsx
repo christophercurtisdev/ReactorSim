@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import TickSystem from '../Core/TickSystem';
 import Game from '../Core/Game';
 import FuelArraySwitchesComponent from './FuelArraySwitchesComponent';
