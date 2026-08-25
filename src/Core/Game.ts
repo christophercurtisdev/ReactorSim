@@ -1,6 +1,5 @@
 import FuelArray from "../Reactor/Objects/FuelArray";
 import TickSystem from "./TickSystem";
-import FuelType from "./TypeLists/FuelType";
 
 class Game {
     private static instance: Game | null = null;
@@ -39,11 +38,11 @@ class Game {
     }
 
     pause() {
-
+        TickSystem.getInstance().stop();
     }
 
     resume() {
-
+        TickSystem.getInstance().start();
     }
 
     start() {

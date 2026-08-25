@@ -6,8 +6,6 @@ import MenuButtonsComponent from './MenuButtonsComponent';
 import AnimationScreen from './AnimationScreenComponent';
 
 export default function GameComponent() {
-  const [inputLocked, setInputLocked] = useState(false);
-
   useEffect(() => {
     const tickSystem = TickSystem.getInstance();
 
@@ -26,7 +24,6 @@ export default function GameComponent() {
       } else {
         Game.getInstance().pause();
       }
-      setInputLocked(!isRunning);
     });
 
     return () => {

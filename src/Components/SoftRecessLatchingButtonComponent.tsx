@@ -1,7 +1,26 @@
-export default function SoftRecessButton() {
+import React from "react";
+
+interface SoftRecessLatchingButtonProps {
+    onCheck: () => void;
+    onUncheck: () => void;
+    checked: boolean;
+}
+
+export default function SoftRecessLatchingButton({ onCheck, onUncheck, checked }: SoftRecessLatchingButtonProps) {
+    const [isChecked, setChecked] = React.useState(checked);
+
+    const onToggle = () => {
+        setChecked(!isChecked);
+        if (isChecked) {
+            onCheck();
+        } else {
+            onUncheck();
+        }
+    }
+    
     return (
         <label className="container">
-            <input type="checkbox" />
+            <input type="checkbox" onChange={onToggle} checked={!isChecked}/>
             <div className="checkmark">
                 <svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512">
                     <title>Checkmark</title>
