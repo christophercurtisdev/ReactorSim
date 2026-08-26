@@ -3,6 +3,8 @@ import FuelRod from '../Reactor/Objects/FuelRod';
 
 export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
     let switchLedClass = 'right '+FuelType.COLOUR(fuelRod.fuelType);
+    let litNixieIconClass = 'z-50 text-neon-'+FuelType.COLOUR(fuelRod.fuelType)+' text-3xl font-bold font-mono absolute top-1 left-1';
+    let unlitNixieIconClass = 'text-unlit-neon text-3xl font-bold font-mono absolute top-1 left-1';
     return (
         <div className='flex'>
             <label className="switch">
@@ -12,8 +14,12 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
                     <span className={switchLedClass}>&#8226;</span>
                 </span>
             </label>
-            {/* Mega confusing symbols for how the rod is doing */}
-            <div>&#128783;</div>
+            <div className="relative">
+                <div className={unlitNixieIconClass}>&#x2668;</div>
+                <div className={unlitNixieIconClass}>&#x2622;</div>
+                <div className={unlitNixieIconClass}>&#x267a;</div>
+                <div className={unlitNixieIconClass}>&#x269b;</div>
+            </div>
         </div>
     );
 }
