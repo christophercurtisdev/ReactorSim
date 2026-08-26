@@ -58,3 +58,7 @@
 .soft-recess-button-container input:checked + .checkmark svg {
   opacity: 1;
 }
+
+#menuButtonsContainer {
+  background-color: #191A1E;
+}

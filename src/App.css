@@ -1,3 +1,7 @@
 @import "./css/FuelRodSwitch.css";
 @import "./css/MenuButton.css";
 @import "./css/CubeAnimation.css";
+
+body {
+    background-color: #565656;
+}
