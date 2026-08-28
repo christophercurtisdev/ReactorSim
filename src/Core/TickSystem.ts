@@ -60,12 +60,12 @@ class TickSystem {
    */
   stop(): void {
     if (this.isRunning) {
+      this.isRunning = false;
       this.notifyStopStartListeners();
       if (this.animationFrameId !== null) {
         cancelAnimationFrame(this.animationFrameId);
         this.animationFrameId = null;
       }
-      this.isRunning = false;
     }
   }
 

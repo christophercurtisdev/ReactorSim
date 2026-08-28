@@ -1,34 +1,21 @@
-import { useEffect } from 'react';
-import TickSystem from '../Core/TickSystem';
-import Game from '../Core/Game';
 import FuelArraySwitchesComponent from './FuelArraySwitchesComponent';
 import MenuButtonsComponent from './MenuButtonsComponent';
-import AnimationScreen from './AnimationScreenComponent';
+import AnimationScreenComponent from './AnimationScreenComponent';
+import Game from '../Core/Game';
+import { useEffect } from 'react';
 
 export default function GameComponent() {
+  const game = Game.getInstance();
+
+  
   useEffect(() => {
-    const tickSystem = TickSystem.getInstance();
+    const game = Game.getInstance();
 
-    // Start the game (only starts on first call)
-    Game.getInstance().start();
-
-    // Subscribe to tick updates
-    const unsubscribeFromTickUpdates = tickSystem.subscribeToTickEvents((currentTick) => {
-      Game.getInstance().tick(currentTick);
-    });
-
-    // Subscribe to tick updates
-    const unsubscribeFromStopStartUpdates = tickSystem.subscribeToStopStartEvents((isRunning) => {
-      if (isRunning) {
-        Game.getInstance().resume();
-      } else {
-        Game.getInstance().pause();
-      }
+    const unsubscribeFromTickUpdates = game.listenToTickEvents((currentTick) => {
+      Game.getInstance().tick();
     });
 
     return () => {
-      // Unsubscribe from this component
-      unsubscribeFromStopStartUpdates();
       unsubscribeFromTickUpdates();
     };
   }, []);
@@ -39,7 +26,7 @@ export default function GameComponent() {
         <FuelArraySwitchesComponent />
       </div>
       <div className="border row-span-16 col-span-16">
-        <AnimationScreen />
+        <AnimationScreenComponent />
       </div>
       <div className="border row-span-4 col-span-32">Power generated / Power required this round</div>
       <div className="border row-span-16 col-span-8">Queued actions</div>

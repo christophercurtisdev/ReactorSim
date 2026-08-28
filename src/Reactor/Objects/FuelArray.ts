@@ -1,14 +1,15 @@
+import type Ticks from "../../Core/Interfaces/TicksInterface";
 import FuelType from "../../Core/TypeLists/FuelType";
 import type TemperatureSensitivity from "../Interfaces/TemperatureSensitivityInterface";
 import FuelRod from "./FuelRod";
 
-class FuelArray implements TemperatureSensitivity {
+class FuelArray implements TemperatureSensitivity, Ticks {
     temperature: number;
     minimumTemperature: number;
     maximumTemperature: number;
     mass: number;
 
-    fuelRods: Array<Array<FuelRod>> = [];
+    fuelRods: Array<Array<FuelRod>> = new Array<Array<FuelRod>>;
 
     rows: number;
     columns: number;
@@ -25,7 +26,15 @@ class FuelArray implements TemperatureSensitivity {
         for(let column = 0; column < this.columns; column ++) {
             this.fuelRods[column] = new Array<FuelRod>();
             for(let row = 0; row < this.rows; row++) {
-                this.fuelRods[column][row] = new FuelRod();
+                this.fuelRods[column][row] = new FuelRod;
+            }
+        }
+    }
+
+    tick(): void {
+        for(let column = 0; column < this.columns; column ++) {
+            for(let row = 0; row < this.rows; row++) {
+                this.fuelRods[column][row].tick();
             }
         }
     }

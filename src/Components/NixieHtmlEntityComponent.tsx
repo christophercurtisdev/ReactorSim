@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-export default function NixieHtmlEntity({ nixieIcons }: { nixieIcons: Array<Array <String>> }) {
-    const [litIcon, setLitIcon] = useState(0);
+interface NixieHtmlEntityProps {
+    nixieIcons: Array<Array<String>>;
+    litIcon?: number;
+}
 
-    // let litNixieIconClass = 'z-50 text-neon-'+FuelType.COLOUR(fuelRod.fuelType)+' text-3xl font-bold font-mono absolute top-1 left-1';
+export default function NixieHtmlEntity({ nixieIcons, litIcon = -1 }: NixieHtmlEntityProps) {
+    const [litIconIndex, setLitIcon] = useState(litIcon);
+
     let unlitNixieIconClass = 'text-unlit-neon text-3xl font-bold font-mono absolute top-1 left-1';
 
     // Validate html entity
@@ -20,13 +24,16 @@ export default function NixieHtmlEntity({ nixieIcons }: { nixieIcons: Array<Arra
         }
     });
 
-    // useEffect(() => {
+    const icons = nixieIcons.map((icon, index) => {
+        let nixieClass;
+        if (index == litIcon) {
+            nixieClass = 'z-50 text-neon-'+icon[1]+' text-3xl font-bold font-mono absolute top-1 left-1';
+        } else {
+            nixieClass = unlitNixieIconClass;
+        }
 
-    // }, [])
-
-    const icons = nixieIcons.map((icon) => 
-        <div className={unlitNixieIconClass} dangerouslySetInnerHTML={{ __html: icon[0] }} />
-    );
+        return (<div key={index} className={nixieClass} dangerouslySetInnerHTML={{ __html: icon[0] }} />)
+    });
 
     return (
         <div className="relative">

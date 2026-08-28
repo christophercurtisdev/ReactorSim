@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import TickSystem from '../Core/TickSystem';
+import TickSystem from '../../Core/TickSystem';
 
 export default function TickDebugComponent() {
   const [tickCount, setTickCount] = useState(0);
@@ -7,9 +7,6 @@ export default function TickDebugComponent() {
 
   useEffect(() => {
     const tickSystem = TickSystem.getInstance();
-
-    // Start the tick system (only starts on first call)
-    tickSystem.start();
 
     // Subscribe to tick updates
     const unsubscribeFromTickUpdates = tickSystem.subscribeToTickEvents((currentTick) => {
@@ -30,7 +27,7 @@ export default function TickDebugComponent() {
 
   return (
     <div className='fixed right-0 top-0 opacity-15 hover:opacity-75 bg-gray-400 transition delay-150 duration-300 z-50'>
-      <p>Running: {ticksRunning ? 'TRUE' : 'FALSE'}</p>
+      <p>Tick System Running: {ticksRunning ? 'TRUE' : 'FALSE'}</p>
       <p>Ticks since load: {tickCount}</p>
     </div>
   );

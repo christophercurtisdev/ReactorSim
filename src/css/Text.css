@@ -1,4 +1,4 @@
-.text-neon-blue { color: #aaf; text-shadow: 0 0 6px #fff, 0 0 20px #00cfff }
+.text-neon-blue { color: rgb(98, 255, 239); text-shadow: 0 0 6px #fff, 0 0 20px #00cfff }
 .text-neon-pink { color: #fff; text-shadow: 0 0 6px #fff, 0 0 20px #ff6fb0 }
 .text-neon-green { color: #afa; text-shadow: 0 0 6px #fff, 0 0 20px #39ff14 }
 .text-neon-white { color: #fff; text-shadow: 0 0 6px #fff, 0 0 20px #ffffff }

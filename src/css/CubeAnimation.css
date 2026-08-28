@@ -13,6 +13,10 @@
   animation: rotate 8s infinite linear;
 }
 
+.cube.stopped {
+  animation-play-state: paused;
+}
+
 .face {
   position: absolute;
   width: 200px;
@@ -26,6 +30,12 @@
   border: 2px solid;
   border-image: linear-gradient(to right, #00ff0033, #00ff0033) 1;
   box-shadow: 0 0 50px rgba(0, 255, 0, 0.2);
+}
+
+.face.stopped {
+  color: rgb(255, 0, 0);
+  border-image: linear-gradient(to right, #ff000033, #ff000033) 1;
+  box-shadow: 0 0 50px rgba(255, 0, 0, 0.2);
 }
 
 .front {

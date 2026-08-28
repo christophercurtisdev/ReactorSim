@@ -3,6 +3,7 @@ import TickSystem from "./TickSystem";
 
 class Game {
     private static instance: Game | null = null;
+    private static isRunning: boolean | null = null;
 
     private radiation: number;
     private powerGenerated: number;
@@ -24,9 +25,11 @@ class Game {
         return Game.instance;
     }
 
-    tick(currentTick: number) {
+    tick() {
         this.calculatePowerGeneration();
         this.calculateRadiation();
+
+        this.fuelArray.tick();
     }
 
     calculateRadiation() {
@@ -38,19 +41,39 @@ class Game {
     }
 
     pause() {
-        TickSystem.getInstance().stop();
+        if (TickSystem.getInstance().isSystemRunning()) {
+            TickSystem.getInstance().stop();
+        }
     }
 
     resume() {
-        TickSystem.getInstance().start();
+        if (!TickSystem.getInstance().isSystemRunning()) {
+            TickSystem.getInstance().start();
+        }
     }
 
     start() {
         TickSystem.getInstance().start();
     }
 
+    stop() {
+        TickSystem.getInstance().stop();
+    }
+
     getFuelArray(): FuelArray {
         return this.fuelArray;
+    }
+
+    getIsRunning(): boolean {
+        return TickSystem.getInstance().isSystemRunning()
+    }
+
+    listenToStopStartEvents(listener: (isRunning: boolean) => void) {
+        return TickSystem.getInstance().subscribeToStopStartEvents(listener);
+    }
+
+    listenToTickEvents(listener: (tickCount: number) => void) {
+        return TickSystem.getInstance().subscribeToTickEvents(listener);
     }
 }
 
