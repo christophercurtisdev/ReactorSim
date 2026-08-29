@@ -3,6 +3,7 @@ import MenuButtonsComponent from './MenuButtonsComponent';
 import AnimationScreenComponent from './AnimationScreenComponent';
 import Game from '../Core/Game';
 import { useEffect } from 'react';
+import QueuedActionsComponent from './QueuedActionsComponent';
 
 export default function GameComponent() {
   useEffect(() => {
@@ -24,7 +25,9 @@ export default function GameComponent() {
         <AnimationScreenComponent />
       </div>
       <div className="border row-span-4 col-span-32">Power generated / Power required this round</div>
-      <div className="border row-span-16 col-span-8">Queued actions</div>
+      <div className="border row-span-16 col-span-8">
+        <QueuedActionsComponent />
+      </div>
       <div className="border row-span-8 col-span-8">
           VENT
       </div>

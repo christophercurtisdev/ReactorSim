@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import Game from "../Core/Game";
+import type QueueAction from "../Core/Interfaces/QueueActionInterface";
 
 export default function AnimationScreenComponent() {
     const [enableAnimation, setEnableAnimation] = useState(Game.getInstance().getIsRunning());
+    const [currentAction, setCurrentAciton] = useState({ action: () => {}, ticks: 0, descriprion: '' });
 
     useEffect(() => {
         // Subscribe to stop start updates
@@ -10,9 +12,15 @@ export default function AnimationScreenComponent() {
             setEnableAnimation(isRunning);
         });
 
+        const unsubscribeFromCurrentActionChanges = Game.getInstance().getActionQueue().listenToCurrentActionChanges((action: QueueAction) => {
+            let tempAction = action == null ? { action: () => {}, ticks: 0, descriprion: '' } : { action: action.action, ticks: action.ticks, descriprion: action.description }
+            setCurrentAciton(tempAction);
+        });
+
         return () => {
             // Unsubscribe from this component
             unsubscribeFromStopStartUpdates();
+            unsubscribeFromCurrentActionChanges();
         };
     }, []);
 
@@ -28,6 +36,9 @@ export default function AnimationScreenComponent() {
                         <div className={ enableAnimation ? "face top" : "face top stopped" }></div>
                         <div className={ enableAnimation ? "face bottom" : "face bottom stopped" }></div>
                     </div>
+                </div>
+                <div className="absolute">
+                    {currentAction.descriprion}
                 </div>
             </div>
         </div>

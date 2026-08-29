@@ -1,6 +1,6 @@
 import FuelArray from "../Reactor/Objects/FuelArray";
 import ActionQueue from "./ActionQueue";
-import type Action from "./Interfaces/ActionInterface";
+import type QueueAction from "./Interfaces/QueueActionInterface";
 import TickSystem from "./TickSystem";
 
 class Game {
@@ -38,8 +38,12 @@ class Game {
         this.fuelArray.tick();
     }
 
-    pushToActionQueue(action: Action) {
+    pushToActionQueue(action: QueueAction) {
         this.actionQueue.addToQueue(action);
+    }
+
+    getActionQueue(): ActionQueue {
+        return this.actionQueue;
     }
 
     calculateRadiation() {

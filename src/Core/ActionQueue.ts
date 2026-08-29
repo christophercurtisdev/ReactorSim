@@ -1,41 +1,88 @@
 import type Ticks from "./Interfaces/TicksInterface"
-import type Action from "./Interfaces/ActionInterface"
+import type QueueAction from "./Interfaces/QueueActionInterface"
 import TickSystem from "./TickSystem";
 
 class ActionQueue implements Ticks{
-    private actionList: Array<Action>;
-    private currentAction?: Action;
+    private actionList: Array<QueueAction>;
+    private currentQueueAction?: QueueAction;
+    private queueChangesListeners: Set<(action: QueueAction, added: boolean) => void> = new Set();
+    private currentActionListeners: Set<(action: QueueAction) => void> = new Set();
     
     constructor() {
         TickSystem.getInstance().subscribeToTickEvents(() => (this.tick()));
-        this.actionList = new Array<Action>;
+        this.actionList = new Array<QueueAction>;
     }
 
-    addToQueue(action: Action) {
+    private notifyQueueChangesListeners(action: QueueAction, added: boolean): void {
+        this.queueChangesListeners.forEach((listener) => listener(action, added));
+    }
+
+    private notifyCurrentActionListeners(action: QueueAction): void {
+        this.currentActionListeners.forEach((listener) => listener(action));
+    }
+
+    addToQueue(action: QueueAction) {
         this.actionList.push(action);
+        this.notifyQueueChangesListeners(action, true);
     }
 
-    processNextAction() {
+    processNextQueueAction() {
+        let originalAction = this.currentQueueAction;
         if (this.actionList[0] != null) {
-            this.currentAction = this.actionList[0];
+            this.currentQueueAction = this.actionList[0];
             this.actionList.shift();
+            this.notifyQueueChangesListeners(this.currentQueueAction, true);
         } else {
-            this.currentAction = null;
+            this.currentQueueAction = null;
+        }
+        if (originalAction != this.currentQueueAction) {
+            this.notifyCurrentActionListeners(this.currentQueueAction);
         }
     }
 
     tick(): void {
-        if (this.currentAction == null) {
-            this.processNextAction();
-        } else {
-            if (this.currentAction.ticks > 0) {
-                this.currentAction.ticks--;
-                return;
-            } else {
-                this.currentAction.action();
-                this.processNextAction();
+        // if (this.currentQueueAction == null) {
+        //     this.processNextQueueAction();
+        // } else {
+        //     if (this.currentQueueAction.ticks > 0) {
+        //         this.currentQueueAction.ticks--;
+        //         return;
+        //     } else {
+        //         this.currentQueueAction.action();
+        //         this.processNextQueueAction();
+        //     }
+        // }
+        if (this.currentQueueAction != null) {
+            this.currentQueueAction.ticks--;
+            if (this.currentQueueAction.ticks <= 0) {
+                this.currentQueueAction.action();
+                this.processNextQueueAction();
             }
+        } else {
+            this.processNextQueueAction();
         }
+    }
+
+    listenToActionQueueChanges(listener: (action: QueueAction, added: boolean) => void) {
+        this.queueChangesListeners.add(listener);
+
+        // Return unsubscribe function
+        return () => {
+            this.queueChangesListeners.delete(listener);
+        };
+    }
+
+    listenToCurrentActionChanges(listener: (action: QueueAction) => void) {
+        this.currentActionListeners.add(listener);
+
+        // Return unsubscribe function
+        return () => {
+            this.currentActionListeners.delete(listener);
+        };
+    }
+
+    getActions() {
+        return this.actionList;
     }
 }
 

@@ -6,14 +6,15 @@ import NixieHtmlEntity from './NixieHtmlEntityComponent';
 import FuelRodStatus from '../Core/TypeLists/FuelRodStatus';
 
 export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
-    const [litIcon, setLitIcon] = useState(-1)
+    const [litIcon, setLitIcon] = useState(-1);
+    const [switchIsOn, setSwitchIsOn] = useState(false);
 
     let switchLedClass = 'right '+FuelType.COLOUR(fuelRod.fuelType);
     let icons = [];
     icons[FuelRodStatus.HEALTHY] = ['&#x269b;', 'blue']; // Active
     icons[FuelRodStatus.IRRADIATED] = ['&#x2622;', 'green']; // Irradiated
     icons[FuelRodStatus.HOT] = ['&#x2668;', 'red']; // Hot
-    icons[FuelRodStatus.COLD] = ['&#x267a;', 'white']; // ???
+    icons[3] = ['&#x267a;', 'white']; // ???
 
     useEffect(() => {
         const game = Game.getInstance();
@@ -25,7 +26,7 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
                 if (fuelRod.status() == FuelRodStatus.HEALTHY) {
                     setLitIcon(-1);
                 } else {
-                    setLitIcon(FuelRodStatus.COLD);
+                    setLitIcon(3);
                 }
             }
         });
@@ -36,8 +37,10 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
     }, []);
 
     function onSwitchToggle() {
-        let action = { ticks: 30, action: () => {fuelRod.setEngaged(!fuelRod.getEngaged())} }
+        let direction = switchIsOn ? 'Disengaging' : 'Engaging'
+        let action = { ticks: 30, action: () => {fuelRod.setEngaged(!switchIsOn) }, description: "Fuel Rod "+fuelRod.label+" "+direction }
         Game.getInstance().pushToActionQueue(action);
+        setSwitchIsOn(!switchIsOn);
     }
 
     return (
