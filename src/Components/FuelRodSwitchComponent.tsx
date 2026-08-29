@@ -3,22 +3,27 @@ import Game from '../Core/Game';
 import FuelType from '../Core/TypeLists/FuelType';
 import FuelRod from '../Reactor/Objects/FuelRod';
 import NixieHtmlEntity from './NixieHtmlEntityComponent';
+import FuelRodStatus from '../Core/TypeLists/FuelRodStatus';
 
 export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
     const [litIcon, setLitIcon] = useState(fuelRod.status())
 
     let switchLedClass = 'right '+FuelType.COLOUR(fuelRod.fuelType);
     let icons = [];
-    icons[0] = ['&#x269b;', 'blue']; // Active
-    icons[1] = ['&#x2622;', 'green']; // Irradiated
-    icons[2] = ['&#x2668;', 'red']; // Hot
-    icons[3] = ['&#x267a;', 'white']; // ???
+    icons[FuelRodStatus.HEALTHY] = ['&#x269b;', 'blue']; // Active
+    icons[FuelRodStatus.IRRADIATED] = ['&#x2622;', 'green']; // Irradiated
+    icons[FuelRodStatus.HOT] = ['&#x2668;', 'red']; // Hot
+    icons[FuelRodStatus.COLD] = ['&#x267a;', 'white']; // ???
 
     useEffect(() => {
         const game = Game.getInstance();
 
         const unsubscribeFromTickUpdates = game.listenToTickEvents((currentTick) => {
-            setLitIcon(fuelRod.status());
+            if (FuelRodStatus.DISENGAGED != fuelRod.status()) {
+                setLitIcon(fuelRod.status());
+            } else {
+                setLitIcon(-1);
+            }
         });
 
         return () => {
@@ -26,10 +31,14 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
         };
     }, []);
 
+    function onSwitchToggle() {
+        fuelRod.setEngaged(FuelRodStatus.DISENGAGED == fuelRod.status());
+    }
+
     return (
         <div className='flex'>
             <label className="switch">
-                <input className="fuel-rod-checkbox" type="checkbox" />
+                <input className="fuel-rod-checkbox" type="checkbox" onChange={onSwitchToggle}/>
                 <span className="toggle">
                     <span className="left">{fuelRod.label}</span>
                     <span className={switchLedClass}>&#8226;</span>

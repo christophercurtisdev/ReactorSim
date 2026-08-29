@@ -1,4 +1,3 @@
-import Game from "../../Core/Game";
 import type Ticks from "../../Core/Interfaces/TicksInterface";
 import FuelRodStatus from "../../Core/TypeLists/FuelRodStatus";
 import FuelType from "../../Core/TypeLists/FuelType";
@@ -17,6 +16,8 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
 
     fuelType: string;
     rodNumber: number;
+
+    private engaged: boolean = false;
 
     constructor(fuelType: string = null, rodNumber: number = 0) {
         this.temperature = 0;
@@ -37,7 +38,9 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
 
     tick(): void {
         console.log('Fuel Rod Ticking');
-        this.temperature++;
+        if (this.status() != FuelRodStatus.DISENGAGED) {
+            this.temperature++;
+        }
     }
 
     onEsceedMaximumRoentgen(): void {
@@ -57,6 +60,9 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
     }
 
     status() {
+        if (!this.engaged) {
+            return FuelRodStatus.DISENGAGED;
+        }
         if (this.maximumRoentgen < this.roentgen) {
             return FuelRodStatus.IRRADIATED;
         }
@@ -67,6 +73,10 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
             return FuelRodStatus.COLD;
         }
         return FuelRodStatus.HEALTHY;
+    }
+
+    setEngaged(engaged: boolean) {
+        this.engaged = engaged;
     }
 }
 

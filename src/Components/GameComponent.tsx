@@ -30,7 +30,9 @@ export default function GameComponent() {
       </div>
       <div className="border row-span-4 col-span-32">Power generated / Power required this round</div>
       <div className="border row-span-16 col-span-8">Queued actions</div>
-      <div className="border row-span-8 col-span-8">Vent</div>
+      <div className="border row-span-8 col-span-8">
+          VENT
+      </div>
       <div className="border row-span-11 col-span-11">Use item and consumables</div>
       <div className="border row-span-11 col-span-21">Reactor overall irradiation, temperature, load, and generation graphs</div>
       <div className="border row-span-8 col-span-8">
