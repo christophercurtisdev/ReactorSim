@@ -22,7 +22,11 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
             if (fuelRod.getEngaged()) {
                 setLitIcon(fuelRod.status());
             } else {
-                setLitIcon(-1);
+                if (fuelRod.status() == FuelRodStatus.HEALTHY) {
+                    setLitIcon(-1);
+                } else {
+                    setLitIcon(FuelRodStatus.COLD);
+                }
             }
         });
 

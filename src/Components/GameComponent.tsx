@@ -5,13 +5,8 @@ import Game from '../Core/Game';
 import { useEffect } from 'react';
 
 export default function GameComponent() {
-  const game = Game.getInstance();
-
-  
   useEffect(() => {
-    const game = Game.getInstance();
-
-    const unsubscribeFromTickUpdates = game.listenToTickEvents((currentTick) => {
+    const unsubscribeFromTickUpdates = Game.getInstance().listenToTickEvents((currentTick) => {
       Game.getInstance().tick();
     });
 
