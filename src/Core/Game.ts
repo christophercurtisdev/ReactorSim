@@ -5,7 +5,6 @@ import TickSystem from "./TickSystem";
 
 class Game {
     private static instance: Game | null = null;
-    private static isRunning: boolean | null = null;
 
     private radiation: number;
     private powerGenerated: number;

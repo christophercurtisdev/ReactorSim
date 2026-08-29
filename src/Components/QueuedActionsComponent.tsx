@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Game from "../Core/Game";
-import type QueueAction from "../Core/Interfaces/QueueActionInterface";
 
 export default function QueuedActionsComponent() {
     const [queuedActions, setQueuedActions] = useState([]);
@@ -8,7 +7,7 @@ export default function QueuedActionsComponent() {
     const actionQueue = Game.getInstance().getActionQueue();
 
     useEffect(() => {
-        const unsubscribeFromTickUpdates = actionQueue.listenToActionQueueChanges((action: QueueAction, added: boolean) => {
+        const unsubscribeFromTickUpdates = actionQueue.listenToActionQueueChanges(() => {
             let actionsList = [];
             actionQueue.getActions().forEach((action) => {
                 actionsList.unshift(action.description);

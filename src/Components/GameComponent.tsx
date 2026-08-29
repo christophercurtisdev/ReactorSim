@@ -7,7 +7,7 @@ import QueuedActionsComponent from './QueuedActionsComponent';
 
 export default function GameComponent() {
   useEffect(() => {
-    const unsubscribeFromTickUpdates = Game.getInstance().listenToTickEvents((currentTick) => {
+    const unsubscribeFromTickUpdates = Game.getInstance().listenToTickEvents(() => {
       Game.getInstance().tick();
     });
 

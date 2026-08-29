@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import Game from "../Core/Game";
 import type QueueAction from "../Core/Interfaces/QueueActionInterface";
+import QueueActionType from "../Core/TypeLists/QueueActionType";
 
 export default function AnimationScreenComponent() {
     const [enableAnimation, setEnableAnimation] = useState(Game.getInstance().getIsRunning());
-    const [currentAction, setCurrentAciton] = useState({ action: () => {}, ticks: 0, descriprion: '' });
+    const [currentAction, setCurrentAction] = useState({ action: () => {}, ticks: 0, description: '', actionType: -1 });
 
     useEffect(() => {
         // Subscribe to stop start updates
@@ -13,8 +14,13 @@ export default function AnimationScreenComponent() {
         });
 
         const unsubscribeFromCurrentActionChanges = Game.getInstance().getActionQueue().listenToCurrentActionChanges((action: QueueAction) => {
-            let tempAction = action == null ? { action: () => {}, ticks: 0, descriprion: '' } : { action: action.action, ticks: action.ticks, descriprion: action.description }
-            setCurrentAciton(tempAction);
+            let tempAction;
+            if(action == null) { 
+                tempAction = { action: () => {}, ticks: 0, description: '', actionType: -1 } 
+            } else {
+                tempAction = { action: action.action, ticks: action.ticks, description: action.description, actionType: action.actionType }
+            }
+            setCurrentAction(tempAction);
         });
 
         return () => {
@@ -23,6 +29,19 @@ export default function AnimationScreenComponent() {
             unsubscribeFromCurrentActionChanges();
         };
     }, []);
+
+    // let icon = currentAction.actionType == QueueActionType.DISENGAGE_FUEL_ROD ? '&#x2191;' : '&#x2193;';
+    let icon = '';
+    switch (currentAction.actionType) {
+        case QueueActionType.ENGAGE_FUEL_ROD:
+            icon = '&#x2193;'
+            break;
+        case QueueActionType.DISENGAGE_FUEL_ROD:
+            icon = '&#x2191;'
+            break;
+        default:
+            icon = '';
+    }
 
     return (
         <div className="justify-center items-center flex h-full">
@@ -37,8 +56,9 @@ export default function AnimationScreenComponent() {
                         <div className={ enableAnimation ? "face bottom" : "face bottom stopped" }></div>
                     </div>
                 </div>
-                <div className="absolute">
-                    {currentAction.descriprion}
+                <div className="absolute flex justify-center align-middle items-center flex-col">
+                    <span>{currentAction.description}</span>
+                    <span className="text-7xl" dangerouslySetInnerHTML={{ __html: icon }}></span>
                 </div>
             </div>
         </div>

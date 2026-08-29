@@ -4,6 +4,7 @@ import FuelType from '../Core/TypeLists/FuelType';
 import FuelRod from '../Reactor/Objects/FuelRod';
 import NixieHtmlEntity from './NixieHtmlEntityComponent';
 import FuelRodStatus from '../Core/TypeLists/FuelRodStatus';
+import QueueActionType from '../Core/TypeLists/QueueActionType';
 
 export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
     const [litIcon, setLitIcon] = useState(-1);
@@ -19,7 +20,7 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
     useEffect(() => {
         const game = Game.getInstance();
 
-        const unsubscribeFromTickUpdates = game.listenToTickEvents((currentTick) => {
+        const unsubscribeFromTickUpdates = game.listenToTickEvents(() => {
             if (fuelRod.getEngaged()) {
                 setLitIcon(fuelRod.status());
             } else {
@@ -38,7 +39,12 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
 
     function onSwitchToggle() {
         let direction = switchIsOn ? 'Disengaging' : 'Engaging'
-        let action = { ticks: 30, action: () => {fuelRod.setEngaged(!switchIsOn) }, description: "Fuel Rod "+fuelRod.label+" "+direction }
+        let action = { 
+            ticks: 30, 
+            action: () => {fuelRod.setEngaged(!switchIsOn) }, 
+            description: "Fuel Rod "+fuelRod.label+" "+direction, 
+            actionType: switchIsOn ? QueueActionType.DISENGAGE_FUEL_ROD : QueueActionType.ENGAGE_FUEL_ROD
+        }
         Game.getInstance().pushToActionQueue(action);
         setSwitchIsOn(!switchIsOn);
     }
