@@ -6,13 +6,11 @@ export default function GameDebugComponent() {
   const [ticksRunning, setTicksRunning] = useState(false);
 
   useEffect(() => {
-    const game = Game.getInstance();
-
-    const unsubscribeFromTickUpdates = game.listenToTickEvents((currentTick) => {
+    const unsubscribeFromTickUpdates = Game.getInstance().listenToTickEvents((currentTick) => {
       setTickCount(currentTick);
     });
 
-    const unsubscribeFromStopStartUpdates = game.listenToStopStartEvents((isRunning) => {
+    const unsubscribeFromStopStartUpdates = Game.getInstance().listenToStopStartEvents((isRunning) => {
       setTicksRunning(isRunning);
     });
 

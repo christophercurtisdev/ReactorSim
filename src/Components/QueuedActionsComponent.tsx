@@ -20,7 +20,7 @@ export default function QueuedActionsComponent() {
         };
     }, []);
 
-    return <div>
+    return <div className="flex flex-col-reverse">
         {queuedActions.map((actionDescription: string, index) => (
             <div key={index}>{actionDescription}</div>
         ))}

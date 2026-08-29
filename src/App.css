@@ -3,6 +3,7 @@
 @import "./css/CubeAnimation.css";
 @import "./css/Text.css";
 @import "./css/CRT.css";
+@import "./css/KnobSwitch.css";
 
 body {
     background-color: #191A1E;

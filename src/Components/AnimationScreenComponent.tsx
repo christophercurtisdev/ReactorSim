@@ -56,7 +56,7 @@ export default function AnimationScreenComponent() {
                         <div className={ enableAnimation ? "face bottom" : "face bottom stopped" }></div>
                     </div>
                 </div>
-                <div className="absolute flex justify-center align-middle items-center flex-col">
+                <div className="absolute flex justify-center items-center flex-col font-mono">
                     <span>{currentAction.description}</span>
                     <span className="text-7xl" dangerouslySetInnerHTML={{ __html: icon }}></span>
                 </div>

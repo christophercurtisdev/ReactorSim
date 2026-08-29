@@ -20,7 +20,7 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
     useEffect(() => {
         const game = Game.getInstance();
 
-        const unsubscribeFromTickUpdates = game.listenToTickEvents(() => {
+        const unsubscribeFromTickUpdates = Game.getInstance().listenToTickEvents(() => {
             if (fuelRod.getEngaged()) {
                 setLitIcon(fuelRod.status());
             } else {
@@ -50,15 +50,27 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
     }
 
     return (
+        // <div className='flex'>
+        //     <label className="switch">
+        //         <input className="fuel-rod-checkbox" type="checkbox" onChange={onSwitchToggle}/>
+        //         <span className="toggle">
+        //             <span className="left">{fuelRod.label}</span>
+        //             <span className={switchLedClass}>&#8226;</span>
+        //         </span>
+        //     </label>
+        //     <NixieHtmlEntity nixieIcons={icons} litIcon={litIcon} />
+        // </div>
         <div className='flex'>
-            <label className="switch">
-                <input className="fuel-rod-checkbox" type="checkbox" onChange={onSwitchToggle}/>
-                <span className="toggle">
-                    <span className="left">{fuelRod.label}</span>
-                    <span className={switchLedClass}>&#8226;</span>
+            <label className="tgl-43">
+            <input className="tgl-43__input" type="checkbox" onChange={onSwitchToggle} />
+            <span className="tgl-43__stage" aria-hidden="true">
+                <span className="tgl-43__dial">
+                <span className="tgl-43__indicator"></span>
                 </span>
+            </span>
             </label>
             <NixieHtmlEntity nixieIcons={icons} litIcon={litIcon} />
+            {/* <span>{fuelRod.label}</span> */}
         </div>
     );
 }

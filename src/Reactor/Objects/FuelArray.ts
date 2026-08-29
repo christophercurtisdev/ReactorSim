@@ -18,7 +18,7 @@ class FuelArray implements TemperatureSensitivity, Ticks {
         this.temperature = 0;
         this.minimumTemperature = 0;
         this.maximumTemperature = 0;
-        this.mass = 0;
+        this.mass = 50;
         
         this.rows = 5;
         this.columns = 5;
@@ -32,11 +32,7 @@ class FuelArray implements TemperatureSensitivity, Ticks {
     }
 
     tick(): void {
-        for(let column = 0; column < this.columns; column ++) {
-            for(let row = 0; row < this.rows; row++) {
-                this.fuelRods[column][row].tick();
-            }
-        }
+        this.updateTemperature();
     }
 
     onExceedMaximumTemperature(): void {
@@ -48,7 +44,10 @@ class FuelArray implements TemperatureSensitivity, Ticks {
     }
 
     updateTemperature(): void {
-        this.temperature = 0;
+        this.listFuelRods().forEach((rod) => {
+            let heatChange = Math.round((rod.mass / this.mass) * (rod.temperature - this.temperature));
+            this.temperature += heatChange;
+        });
     }
 
     getFuelRodAtPosition(row: number, column: number) {

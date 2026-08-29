@@ -1,4 +1,5 @@
 import FuelArray from "../Reactor/Objects/FuelArray";
+import Reactor from "../Reactor/Objects/Reactor";
 import ActionQueue from "./ActionQueue";
 import type QueueAction from "./Interfaces/QueueActionInterface";
 import TickSystem from "./TickSystem";
@@ -6,21 +7,14 @@ import TickSystem from "./TickSystem";
 class Game {
     private static instance: Game | null = null;
 
-    private radiation: number;
-    private powerGenerated: number;
-    private fuelArray: FuelArray | null;
-
+    private reactor: Reactor;
     private actionQueue: ActionQueue;
 
     private constructor() {
         // Maybe move reactor components to dedicated Reactor object if Game gets too big
-        this.fuelArray = new FuelArray();
-        this.fuelArray.fillWith();
+        this.reactor = new Reactor();
 
-        this.powerGenerated = 0;
-        this.radiation = 0;
-
-        this.actionQueue = new ActionQueue;
+        this.actionQueue = new ActionQueue();
     }
 
     static getInstance(): Game {
@@ -31,10 +25,7 @@ class Game {
     }
 
     tick() {
-        this.calculatePowerGeneration();
-        this.calculateRadiation();
-
-        this.fuelArray.tick();
+        this.reactor.tick();
     }
 
     pushToActionQueue(action: QueueAction) {
@@ -43,14 +34,6 @@ class Game {
 
     getActionQueue(): ActionQueue {
         return this.actionQueue;
-    }
-
-    calculateRadiation() {
-
-    }
-
-    calculatePowerGeneration() {
-
     }
 
     pause() {
@@ -74,7 +57,11 @@ class Game {
     }
 
     getFuelArray(): FuelArray {
-        return this.fuelArray;
+        return this.reactor.getFuelArray();
+    }
+
+    getReactor(): Reactor {
+        return this.reactor;
     }
 
     getIsRunning(): boolean {

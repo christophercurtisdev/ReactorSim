@@ -23,7 +23,8 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
         this.temperature = 0;
         this.minimumTemperature = 0;
         this.maximumTemperature = 100;
-        this.mass = 0;
+        this.mass = 1;
+        this.roentgen = 1;
 
         if(FuelType.isValidFuelType(fuelType)) {
             this.fuelType = fuelType
@@ -37,16 +38,11 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
     }
 
     tick(): void {
-        if (this.engaged) {
-            this.temperature++;
-        } else {
-            if (this.temperature > 0) {
-                this.temperature--;
-            }
-        }
+        this.roentgen = this.engaged ? 1 : -1;
+        this.updateTemperature();
     }
 
-    onEsceedMaximumRoentgen(): void {
+    onExceedMaximumRoentgen(): void {
         console.log("Roentgen Exceeded in Fuel Rod");
     }
 
@@ -59,7 +55,10 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
     }
 
     updateTemperature(): void {
-        this.temperature = 0;
+        this.temperature += (this.roentgen / 100) + Math.sign(this.roentgen);
+        if (this.temperature < 0) {
+            this.temperature = 0;
+        }
     }
 
     status() {

@@ -1,5 +1,5 @@
 export default interface Irradiation {
     roentgen: number;
     maximumRoentgen: number;
-    onEsceedMaximumRoentgen(): void;
+    onExceedMaximumRoentgen(): void;
 }
