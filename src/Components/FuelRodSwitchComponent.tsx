@@ -6,7 +6,7 @@ import NixieHtmlEntity from './NixieHtmlEntityComponent';
 import FuelRodStatus from '../Core/TypeLists/FuelRodStatus';
 
 export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
-    const [litIcon, setLitIcon] = useState(fuelRod.status())
+    const [litIcon, setLitIcon] = useState(-1)
 
     let switchLedClass = 'right '+FuelType.COLOUR(fuelRod.fuelType);
     let icons = [];
@@ -19,7 +19,7 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
         const game = Game.getInstance();
 
         const unsubscribeFromTickUpdates = game.listenToTickEvents((currentTick) => {
-            if (FuelRodStatus.DISENGAGED != fuelRod.status()) {
+            if (fuelRod.getEngaged()) {
                 setLitIcon(fuelRod.status());
             } else {
                 setLitIcon(-1);
@@ -32,7 +32,8 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
     }, []);
 
     function onSwitchToggle() {
-        fuelRod.setEngaged(FuelRodStatus.DISENGAGED == fuelRod.status());
+        let action = { ticks: 30, action: () => {fuelRod.setEngaged(!fuelRod.getEngaged())} }
+        Game.getInstance().pushToActionQueue(action);
     }
 
     return (

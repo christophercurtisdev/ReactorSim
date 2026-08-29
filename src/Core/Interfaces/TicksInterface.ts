@@ -1,3 +1,3 @@
 export default interface Ticks {
-    tick(): void;
+    tick(currentTick?: number): void;
 }

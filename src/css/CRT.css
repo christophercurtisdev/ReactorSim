@@ -16,16 +16,9 @@
   position: relative;
   overflow: hidden;
 
-  /* Flicker */
-  animation: flicker 0.03s infinite alternate;
 }
 
 .crt::selection {
   color: #000;
   background: #33ff33;
-}
-
-@keyframes flicker {
-  0%   { opacity: 0.7; }
-  100% { opacity: 1.0; }
 }

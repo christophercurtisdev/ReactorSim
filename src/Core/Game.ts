@@ -1,4 +1,6 @@
 import FuelArray from "../Reactor/Objects/FuelArray";
+import ActionQueue from "./ActionQueue";
+import type Action from "./Interfaces/ActionInterface";
 import TickSystem from "./TickSystem";
 
 class Game {
@@ -9,6 +11,8 @@ class Game {
     private powerGenerated: number;
     private fuelArray: FuelArray | null;
 
+    private actionQueue: ActionQueue;
+
     private constructor() {
         // Maybe move reactor components to dedicated Reactor object if Game gets too big
         this.fuelArray = new FuelArray();
@@ -16,6 +20,8 @@ class Game {
 
         this.powerGenerated = 0;
         this.radiation = 0;
+
+        this.actionQueue = new ActionQueue;
     }
 
     static getInstance(): Game {
@@ -30,6 +36,10 @@ class Game {
         this.calculateRadiation();
 
         this.fuelArray.tick();
+    }
+
+    pushToActionQueue(action: Action) {
+        this.actionQueue.addToQueue(action);
     }
 
     calculateRadiation() {

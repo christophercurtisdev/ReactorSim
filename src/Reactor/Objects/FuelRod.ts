@@ -37,9 +37,12 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
     }
 
     tick(): void {
-        console.log('Fuel Rod Ticking');
-        if (this.status() != FuelRodStatus.DISENGAGED) {
+        if (this.engaged) {
             this.temperature++;
+        } else {
+            if (this.temperature > 0) {
+                this.temperature--;
+            }
         }
     }
 
@@ -60,9 +63,6 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
     }
 
     status() {
-        if (!this.engaged) {
-            return FuelRodStatus.DISENGAGED;
-        }
         if (this.maximumRoentgen < this.roentgen) {
             return FuelRodStatus.IRRADIATED;
         }
@@ -77,6 +77,10 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
 
     setEngaged(engaged: boolean) {
         this.engaged = engaged;
+    }
+
+    getEngaged(): boolean {
+        return this.engaged
     }
 }
 
