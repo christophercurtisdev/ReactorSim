@@ -10,6 +10,8 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
     minimumTemperature: number;
     maximumTemperature: number;
     mass: number;
+    ambientTemperature: number;
+    temperatureBleedRate: number;
 
     roentgen: number;
     maximumRoentgen: number;
@@ -20,7 +22,8 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
     private engaged: boolean = false;
 
     constructor(fuelType: string = null, rodNumber: number = 0) {
-        this.temperature = 0;
+        this.temperature = 40;
+        this.ambientTemperature = 40;
         this.minimumTemperature = 0;
         this.maximumTemperature = 100;
         this.mass = 1;
@@ -38,7 +41,7 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
     }
 
     tick(): void {
-        this.roentgen = this.engaged ? 1 : -1;
+        this.roentgen = this.engaged ? 1 : 0;
         this.updateTemperature();
     }
 
@@ -55,10 +58,7 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
     }
 
     updateTemperature(): void {
-        this.temperature += (this.roentgen / 100) + Math.sign(this.roentgen);
-        if (this.temperature < 0) {
-            this.temperature = 0;
-        }
+        this.temperature = this.engaged ? 100 : 40;
     }
 
     status() {

@@ -8,6 +8,8 @@ class FuelArray implements TemperatureSensitivity, Ticks {
     minimumTemperature: number;
     maximumTemperature: number;
     mass: number;
+    ambientTemperature: number;
+    temperatureBleedRate: number;
 
     fuelRods: Array<Array<FuelRod>> = new Array<Array<FuelRod>>;
 
@@ -19,6 +21,8 @@ class FuelArray implements TemperatureSensitivity, Ticks {
         this.minimumTemperature = 0;
         this.maximumTemperature = 0;
         this.mass = 50;
+        this.ambientTemperature = 30;
+        this.temperatureBleedRate = 1;
         
         this.rows = 5;
         this.columns = 5;
@@ -44,10 +48,15 @@ class FuelArray implements TemperatureSensitivity, Ticks {
     }
 
     updateTemperature(): void {
+        let heatChange = 0;
         this.listFuelRods().forEach((rod) => {
-            let heatChange = Math.round((rod.mass / this.mass) * (rod.temperature - this.temperature));
-            this.temperature += heatChange;
+            // hotter or colder * mass differential * heat differential
+            // The hotter colder and heat diff component can be combined but I like how this looks more.
+            heatChange += Math.sign(rod.temperature - this.temperature) * (rod.mass / this.mass) * ((Math.abs(rod.temperature - this.temperature) / 10));
         });
+        heatChange += (Math.sign(this.ambientTemperature - this.temperature) * this.temperatureBleedRate);
+        console.log(this.temperature)
+        this.temperature += heatChange;
     }
 
     getFuelRodAtPosition(row: number, column: number) {
