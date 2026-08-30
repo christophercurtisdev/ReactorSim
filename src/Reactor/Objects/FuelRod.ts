@@ -12,6 +12,7 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
     mass: number;
     ambientTemperature: number;
     temperatureBleedRate: number;
+    heatTransferImpotence: number;
 
     roentgen: number;
     maximumRoentgen: number;

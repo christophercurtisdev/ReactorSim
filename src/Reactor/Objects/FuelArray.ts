@@ -10,6 +10,7 @@ class FuelArray implements TemperatureSensitivity, Ticks {
     mass: number;
     ambientTemperature: number;
     temperatureBleedRate: number;
+    heatTransferImpotence: number;
 
     fuelRods: Array<Array<FuelRod>> = new Array<Array<FuelRod>>;
 
@@ -23,9 +24,10 @@ class FuelArray implements TemperatureSensitivity, Ticks {
         this.mass = 50;
         this.ambientTemperature = 30;
         this.temperatureBleedRate = 1;
+        this.heatTransferImpotence = 10;
         
-        this.rows = 5;
-        this.columns = 5;
+        this.rows = 10;
+        this.columns = 10;
 
         for(let column = 0; column < this.columns; column ++) {
             this.fuelRods[column] = new Array<FuelRod>();
@@ -50,9 +52,11 @@ class FuelArray implements TemperatureSensitivity, Ticks {
     updateTemperature(): void {
         let heatChange = 0;
         this.listFuelRods().forEach((rod) => {
-            // hotter or colder * mass differential * heat differential
-            // The hotter colder and heat diff component can be combined but I like how this looks more.
-            heatChange += Math.sign(rod.temperature - this.temperature) * (rod.mass / this.mass) * ((Math.abs(rod.temperature - this.temperature) / 10));
+            if (rod.getEngaged()) {
+                // hotter or colder * mass differential * (heat differential / heat transfer impotence)
+                // The hotter colder and heat diff component can be combined but I like how this looks more.
+                heatChange += Math.sign(rod.temperature - this.temperature) * (rod.mass / this.mass) * ((Math.abs(rod.temperature - this.temperature) / this.heatTransferImpotence));
+            }
         });
         heatChange += (Math.sign(this.ambientTemperature - this.temperature) * this.temperatureBleedRate);
         console.log(this.temperature)
