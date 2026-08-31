@@ -26,8 +26,8 @@ class FuelArray implements TemperatureSensitivity, Ticks {
         this.temperatureBleedRate = 1;
         this.heatTransferImpotence = 10;
         
-        this.rows = 10;
-        this.columns = 10;
+        this.rows = 5;
+        this.columns = 5;
 
         for(let column = 0; column < this.columns; column ++) {
             this.fuelRods[column] = new Array<FuelRod>();
@@ -59,7 +59,6 @@ class FuelArray implements TemperatureSensitivity, Ticks {
             }
         });
         heatChange += (Math.sign(this.ambientTemperature - this.temperature) * this.temperatureBleedRate);
-        console.log(this.temperature)
         this.temperature += heatChange;
     }
 

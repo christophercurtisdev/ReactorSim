@@ -4,6 +4,7 @@ import AnimationScreenComponent from './AnimationScreenComponent';
 import Game from '../Core/Game';
 import { useEffect } from 'react';
 import QueuedActionsComponent from './QueuedActionsComponent';
+import ReactorStatusComponent from './ReactorStatusComponent';
 
 export default function GameComponent() {
   useEffect(() => {
@@ -32,7 +33,9 @@ export default function GameComponent() {
           VENT
       </div>
       <div className="border row-span-11 col-span-11">Use item and consumables</div>
-      <div className="border row-span-11 col-span-21">Reactor overall irradiation, temperature, load, and generation graphs</div>
+      <div className="border row-span-11 col-span-21">
+        <ReactorStatusComponent />
+      </div>
       <div className="border row-span-8 col-span-8">
         <MenuButtonsComponent />
       </div>
