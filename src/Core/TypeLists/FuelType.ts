@@ -10,22 +10,6 @@ abstract class FuelType {
         this.GRAPHITE,
     ];
 
-    public static COLOUR(fuelType: string): string | null {
-        if (!this.isValidFuelType(fuelType)) {
-            return null
-        }
-        switch (fuelType) {
-            case this.URANIUM235:
-                return 'green';
-            case this.PLUTONIUM:
-                return 'yellow';
-            case this.THORIUM:
-                return 'blue';
-            case this.GRAPHITE:
-                return 'white'
-        }
-    }
-
     public static isValidFuelType(fuelType: string) {
         return this.ALL.includes(fuelType);
     }

@@ -11,7 +11,6 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
     const [litIcon, setLitIcon] = useState(-1);
     const [switchIsOn, setSwitchIsOn] = useState(false);
 
-    let switchLedClass = 'right '+FuelType.COLOUR(fuelRod.fuelType);
     let icons = [];
     icons[FuelRodStatus.HEALTHY] = ['&#x269b;', 'blue']; // Active
     icons[FuelRodStatus.IRRADIATED] = ['&#x2622;', 'green']; // Irradiated
@@ -57,16 +56,6 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
     );
 
     return (
-        // <div className='flex'>
-        //     <label className="switch">
-        //         <input className="fuel-rod-checkbox" type="checkbox" onChange={onSwitchToggle}/>
-        //         <span className="toggle">
-        //             <span className="left">{fuelRod.label}</span>
-        //             <span className={switchLedClass}>&#8226;</span>
-        //         </span>
-        //     </label>
-        //     <NixieHtmlEntity nixieIcons={icons} litIcon={litIcon} />
-        // </div>
         <div className='flex flex-row-reverse justify-center items-center'>
             <div className="fuel-indicator">
                 <span className='fuel-indicator-bar rounded border-4 border-t-mauve-900 border-l-mauve-900 border-b-mauve-700 border-r-mauve-700 w-4 top-2'></span>

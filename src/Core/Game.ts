@@ -27,6 +27,8 @@ class Game {
         this.reactor.getFuelArray().setRod(rod6);
         this.reactor.getFuelArray().setRod(rod7);
         this.reactor.getFuelArray().setRod(rod11);
+
+        console.log(this.reactor.getFuelArray().getRodNeighbours(6));
     }
 
     static getInstance(): Game {

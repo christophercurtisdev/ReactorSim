@@ -40,10 +40,15 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
         }
         return this;
     }
+    
+    updateRoentgen(): void {
+        
+    }
 
     tick(): void {
         this.roentgen = this.engaged ? 1 : 0;
         this.updateTemperature();
+        this.updateRoentgen();
     }
 
     onExceedMaximumRoentgen(): void {
