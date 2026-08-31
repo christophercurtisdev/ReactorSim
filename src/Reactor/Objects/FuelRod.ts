@@ -22,7 +22,7 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
 
     private engaged: boolean = false;
 
-    constructor(fuelType: string = null, rodNumber: number = 0) {
+    constructor(fuelType: string = null, rodNumber: number = 0, label: string = null) {
         this.temperature = 40;
         this.ambientTemperature = 40;
         this.minimumTemperature = 0;
@@ -33,7 +33,7 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
         if(FuelType.isValidFuelType(fuelType)) {
             this.fuelType = fuelType
             this.rodNumber = rodNumber;
-            this.label = fuelType.substring(0,1) + this.rodNumber;
+            this.label = label ?? fuelType.substring(0,1) + this.rodNumber;
         } else {
             this.fuelType = null;
             this.label = null;

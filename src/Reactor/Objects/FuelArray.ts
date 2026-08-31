@@ -88,6 +88,17 @@ class FuelArray implements TemperatureSensitivity, Ticks {
             }
         }
     }
+
+    setRod(rod: FuelRod) {
+        for(let column = 0; column < this.columns; column ++) {
+            for(let row = 0; row < this.rows; row++) {
+                if (this.fuelRods[column][row].rodNumber == rod.rodNumber) {
+                    this.fuelRods[column][row] = rod;
+                    return;
+                }
+            }
+        }    
+    }
 }
 
 export default FuelArray;

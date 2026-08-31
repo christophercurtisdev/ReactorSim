@@ -1,8 +1,10 @@
 import FuelArray from "../Reactor/Objects/FuelArray";
+import FuelRod from "../Reactor/Objects/FuelRod";
 import Reactor from "../Reactor/Objects/Reactor";
 import ActionQueue from "./ActionQueue";
 import type QueueAction from "./Interfaces/QueueActionInterface";
 import TickSystem from "./TickSystem";
+import FuelType from "./TypeLists/FuelType";
 
 class Game {
     private static instance: Game | null = null;
@@ -11,10 +13,20 @@ class Game {
     private actionQueue: ActionQueue;
 
     private constructor() {
-        // Maybe move reactor components to dedicated Reactor object if Game gets too big
         this.reactor = new Reactor();
 
         this.actionQueue = new ActionQueue();
+
+        let rod1 = new FuelRod(FuelType.GRAPHITE, 1, 'G');
+        let rod5 = new FuelRod(FuelType.GRAPHITE, 5, 'G');
+        let rod7 = new FuelRod(FuelType.GRAPHITE, 7, 'G');
+        let rod11 = new FuelRod(FuelType.GRAPHITE, 11, 'G');
+        let rod6 = new FuelRod(FuelType.URANIUM235, 6, 'U');
+        this.reactor.getFuelArray().setRod(rod1);
+        this.reactor.getFuelArray().setRod(rod5);
+        this.reactor.getFuelArray().setRod(rod6);
+        this.reactor.getFuelArray().setRod(rod7);
+        this.reactor.getFuelArray().setRod(rod11);
     }
 
     static getInstance(): Game {
