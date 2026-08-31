@@ -26,7 +26,7 @@ export default function TickDebugComponent() {
   }, []);
 
   return (
-    <div className='fixed right-0 top-0 opacity-15 hover:opacity-75 bg-gray-400 transition delay-150 duration-300 z-50'>
+    <div className='fixed right-0 top-0 opacity-15 hover:opacity-75 bg-yellow-400 transition delay-150 duration-300 z-50'>
       <p>Tick System Running: {ticksRunning ? 'TRUE' : 'FALSE'}</p>
       <p>Ticks since load: {tickCount}</p>
     </div>

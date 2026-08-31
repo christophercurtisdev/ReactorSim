@@ -6,7 +6,7 @@ import TickDebugComponent from './Components/Debug/TickDebugComponent';
 function App() {
 
   return (
-    <div className='flex w-screen h-screen'>
+    <div className='flex w-screen h-screen bg-yellow-800'>
       {/* <TickDebugComponent /> */}
       <GameDebugComponent />
       <GameComponent />

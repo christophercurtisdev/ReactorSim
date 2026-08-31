@@ -68,7 +68,7 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
         //     <NixieHtmlEntity nixieIcons={icons} litIcon={litIcon} />
         // </div>
         <div className='flex flex-row-reverse justify-center items-center'>
-            <div>
+            <div className='w-16'>
                 <CRTCopmonent content={labelDisplay} border={false} />
             </div>
             <label className="tgl-43">

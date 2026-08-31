@@ -16,7 +16,7 @@
   display: block;
   position: relative;
   height: var(--size);
-  background-color: #191A1E;
+  background-color: oklch(47.6% 0.114 61.907);
   border-radius: 100%;
   cursor: pointer;
   padding: 5px;
@@ -52,13 +52,9 @@
 }
 
 .soft-recess-button-container input:checked + .checkmark .glow {
-    background: radial-gradient(#ffffff66, #00000000, #00000000);
+    background: radial-gradient(#00ff0099, #00000000, #00000000);
 }
 
 .soft-recess-button-container input:checked + .checkmark svg {
   opacity: 1;
-}
-
-#menuButtonsContainer {
-  background-color: #191A1E;
 }
