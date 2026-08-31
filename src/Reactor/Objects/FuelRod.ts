@@ -1,8 +1,10 @@
+import CorrelationSolver from "../../Core/CorrelationSolver";
 import type Ticks from "../../Core/Interfaces/TicksInterface";
 import FuelRodStatus from "../../Core/TypeLists/FuelRodStatus";
 import FuelType from "../../Core/TypeLists/FuelType";
 import type Irradiation from "../Interfaces/IrradiationInterface";
 import type TemperatureSensitivity from "../Interfaces/TemperatureSensitivityInterface";
+import type FuelArray from "./FuelArray";
 
 class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
     label: string;
@@ -20,15 +22,18 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
     fuelType: string;
     rodNumber: number;
 
+    fuelArray: FuelArray;
+
     private engaged: boolean = false;
 
-    constructor(fuelType: string = null, rodNumber: number = 0, label: string = null) {
+    constructor(fuelArray: FuelArray, fuelType: string = null, rodNumber: number = 0, label: string = null) {
         this.temperature = 40;
         this.ambientTemperature = 40;
-        this.minimumTemperature = 0;
+        this.minimumTemperature = 10;
         this.maximumTemperature = 100;
         this.mass = 1;
         this.roentgen = 1;
+        this.fuelArray = fuelArray;
 
         if(FuelType.isValidFuelType(fuelType)) {
             this.fuelType = fuelType
@@ -40,9 +45,13 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
         }
         return this;
     }
-    
+
     updateRoentgen(): void {
-        
+        // TEST VALUES
+        let heatImpact = CorrelationSolver.parabola({x: this.temperature / this.maximumTemperature, exponent: 4, a: 1, b: 0,c: -0.03});
+        let engagedNeighbours = this.fuelArray.getRodNeighbours(this.rodNumber).filter((rod) => rod == null ? false : rod.getEngaged()).length;
+        let controlRodImpact = CorrelationSolver.sigmoid({x: engagedNeighbours, a: -1, b: 5.5, c: -2});
+        console.log(controlRodImpact);
     }
 
     tick(): void {

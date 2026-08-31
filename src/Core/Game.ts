@@ -17,11 +17,11 @@ class Game {
 
         this.actionQueue = new ActionQueue();
 
-        let rod1 = new FuelRod(FuelType.GRAPHITE, 1, 'G');
-        let rod5 = new FuelRod(FuelType.GRAPHITE, 5, 'G');
-        let rod7 = new FuelRod(FuelType.GRAPHITE, 7, 'G');
-        let rod11 = new FuelRod(FuelType.GRAPHITE, 11, 'G');
-        let rod6 = new FuelRod(FuelType.URANIUM235, 6, 'U');
+        let rod1 = new FuelRod(this.reactor.fuelArray, FuelType.GRAPHITE, 1, 'G');
+        let rod5 = new FuelRod(this.reactor.fuelArray, FuelType.GRAPHITE, 5, 'G');
+        let rod7 = new FuelRod(this.reactor.fuelArray, FuelType.GRAPHITE, 7, 'G');
+        let rod11 = new FuelRod(this.reactor.fuelArray, FuelType.GRAPHITE, 11, 'G');
+        let rod6 = new FuelRod(this.reactor.fuelArray, FuelType.URANIUM235, 6, 'U');
         this.reactor.getFuelArray().setRod(rod1);
         this.reactor.getFuelArray().setRod(rod5);
         this.reactor.getFuelArray().setRod(rod6);

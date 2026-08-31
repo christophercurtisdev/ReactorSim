@@ -32,7 +32,7 @@ class FuelArray implements TemperatureSensitivity, Ticks {
         for(let column = 0; column < this.columns; column ++) {
             this.fuelRods[column] = new Array<FuelRod>();
             for(let row = 0; row < this.rows; row++) {
-                this.fuelRods[column][row] = new FuelRod;
+                this.fuelRods[column][row] = new FuelRod(this);
             }
         }
     }
@@ -83,7 +83,7 @@ class FuelArray implements TemperatureSensitivity, Ticks {
             for(let row = 0; row < this.rows; row++) {
                 let rodNumber = (column * this.rows) + row;
                 let validatedFuelType = fuelType ?? FuelType.ALL[Math.floor(Math.random() * FuelType.ALL.length)];
-                this.fuelRods[column][row] = new FuelRod(validatedFuelType, rodNumber);
+                this.fuelRods[column][row] = new FuelRod(this, validatedFuelType, rodNumber);
                 this.fuelRods[column][row].label = String(column) + String(row) + validatedFuelType.substring(0,1);
             }
         }
@@ -117,8 +117,8 @@ class FuelArray implements TemperatureSensitivity, Ticks {
                 if (this.fuelRods[column][row].rodNumber == rodNumber) {
                     let rods = [];
                     rods[0] = row > 0 ? this.fuelRods[column][row - 1] : null;
-                    rods[1] = this.columns > column ? this.fuelRods[column + 1][row] : null;
-                    rods[2] = this.rows > row ? this.fuelRods[column][row + 1] : null;
+                    rods[1] = this.columns-1 > column ? this.fuelRods[column + 1][row] : null;
+                    rods[2] = this.rows-1 > row ? this.fuelRods[column][row + 1] : null;
                     rods[3] = column > 0 ? this.fuelRods[column - 1][row] : null;
 
                     return rods;
