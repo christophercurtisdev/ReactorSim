@@ -1,4 +1,4 @@
-import Game from '../Core/Game';
+import Game from '../../Core/Game';
 import FuelRodSwitchComponent from './FuelRodSwitchComponent';
 
 export default function FuelArraySwitchesComponent() {

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import Game from '../Core/Game';
-import FuelType from '../Core/TypeLists/FuelType';
-import FuelRod from '../Reactor/Objects/FuelRod';
-import NixieHtmlEntity from './NixieHtmlEntityComponent';
-import FuelRodStatus from '../Core/TypeLists/FuelRodStatus';
-import QueueActionType from '../Core/TypeLists/QueueActionType';
+import Game from '../../Core/Game';
+import FuelType from '../../Core/TypeLists/FuelType';
+import FuelRod from '../../Reactor/Objects/FuelRod';
+import NixieHtmlEntity from '../Partials/NixieHtmlEntityComponent';
+import FuelRodStatus from '../../Core/TypeLists/FuelRodStatus';
+import QueueActionType from '../../Core/TypeLists/QueueActionType';
+import CRTCopmonent from '../Partials/CRTComponent';
 
 export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
     const [litIcon, setLitIcon] = useState(-1);
@@ -42,12 +43,18 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
         let action = { 
             ticks: 30, 
             action: () => {fuelRod.setEngaged(!switchIsOn) }, 
-            description: "Fuel Rod "+fuelRod.label+" "+direction, 
+            description: fuelRod.label+" "+direction, 
             actionType: switchIsOn ? QueueActionType.DISENGAGE_FUEL_ROD : QueueActionType.ENGAGE_FUEL_ROD
         }
         Game.getInstance().pushToActionQueue(action);
         setSwitchIsOn(!switchIsOn);
     }
+
+    let labelDisplay = (
+    <div className='font-thin crt-text'>
+        {fuelRod.label}
+    </div>
+    );
 
     return (
         // <div className='flex'>
@@ -60,17 +67,19 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
         //     </label>
         //     <NixieHtmlEntity nixieIcons={icons} litIcon={litIcon} />
         // </div>
-        <div className='flex'>
+        <div className='flex flex-row-reverse justify-center items-center'>
+            <div>
+                <CRTCopmonent content={labelDisplay} border={false} />
+            </div>
             <label className="tgl-43">
-            <input className="tgl-43__input" type="checkbox" onChange={onSwitchToggle} />
-            <span className="tgl-43__stage" aria-hidden="true">
-                <span className="tgl-43__dial">
-                <span className="tgl-43__indicator"></span>
+                <input className="tgl-43__input" type="checkbox" onChange={onSwitchToggle} />
+                <span className="tgl-43__stage" aria-hidden="true">
+                    <span className="tgl-43__dial">
+                    <span className="tgl-43__indicator"></span>
+                    </span>
                 </span>
-            </span>
             </label>
             <NixieHtmlEntity nixieIcons={icons} litIcon={litIcon} />
-            {/* <span>{fuelRod.label}</span> */}
         </div>
     );
 }

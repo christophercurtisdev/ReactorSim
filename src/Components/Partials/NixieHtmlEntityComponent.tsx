@@ -8,7 +8,7 @@ interface NixieHtmlEntityProps {
 export default function NixieHtmlEntity({ nixieIcons, litIcon = -1 }: NixieHtmlEntityProps) {
     const [litIconIndex, setLitIcon] = useState(litIcon);
 
-    let unlitNixieIconClass = 'text-unlit-neon text-3xl font-bold font-mono absolute top-1 left-1';
+    let nixieIconClass = ' text-3xl font-bold font-mono absolute nixie-icon';
 
     // Validate html entity
     nixieIcons.forEach(function(icon, index) {
@@ -27,16 +27,16 @@ export default function NixieHtmlEntity({ nixieIcons, litIcon = -1 }: NixieHtmlE
     const icons = nixieIcons.map((icon, index) => {
         let nixieClass;
         if (index == litIcon) {
-            nixieClass = 'z-50 text-neon-'+icon[1]+' text-3xl font-bold font-mono absolute top-1 left-1';
+            nixieClass = 'z-50 text-neon-'+icon[1]+nixieIconClass;
         } else {
-            nixieClass = unlitNixieIconClass;
+            nixieClass = 'text-unlit-neon' + nixieIconClass;
         }
 
         return (<div key={index} className={nixieClass} dangerouslySetInnerHTML={{ __html: icon[0] }} />)
     });
 
     return (
-        <div className="relative">
+        <div className="nixie-icon-container">
             {icons}
         </div> 
     );

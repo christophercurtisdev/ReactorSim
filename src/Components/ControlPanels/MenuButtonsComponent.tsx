@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Game from "../Core/Game";
+import Game from "../../Core/Game";
 import SoftRecessLatchingButton from "./SoftRecessLatchingButtonComponent";
 
 function pauseGame(): void {

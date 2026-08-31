@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import Game from "../Core/Game";
+import Game from "../../Core/Game";
+import CRTCopmonent from "../Partials/CRTComponent";
 
 export default function ReactorStatusComponent() {
     const [reactorFuelArrayHeat, setReactorFuelArrayHeat] = useState(0);
@@ -14,11 +15,10 @@ export default function ReactorStatusComponent() {
         };
     }, []);
 
-    return (
-        <div className="justify-center items-center flex h-full">
-            <div className="crt flex h-full w-full justify-center items-center">
+    let content = <div className="justify-center items-center flex h-full">
+            <div className="flex h-full w-full justify-center items-center">
                 <div className="crt-text">{reactorFuelArrayHeat}</div>
             </div>
         </div>
-    );
+    return <CRTCopmonent content={content} />
 }

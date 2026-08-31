@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import Game from "../Core/Game";
+import Game from "../../Core/Game";
+import CRTCopmonent from "../Partials/CRTComponent";
 
 export default function QueuedActionsComponent() {
     const [queuedActions, setQueuedActions] = useState([]);
@@ -20,11 +21,11 @@ export default function QueuedActionsComponent() {
         };
     }, []);
 
-    return <div className="crt h-full">
-        <div className="flex flex-col-reverse font-mono font-thin">
-            {queuedActions.map((actionDescription: string, index) => (
-                <div key={index} className="crt-text">{actionDescription}</div>
-            ))}
-        </div>
-    </div>
+    let content = (<div className="flex flex-col-reverse font-mono font-thin mx-1">
+                {queuedActions.map((actionDescription: string, index) => (
+                    <div key={index} className="crt-text text-sm">{actionDescription}</div>
+                ))}
+            </div>);
+
+    return <CRTCopmonent content={content} />
 }

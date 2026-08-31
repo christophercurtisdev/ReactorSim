@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import Game from "../Core/Game";
-import type QueueAction from "../Core/Interfaces/QueueActionInterface";
-import QueueActionType from "../Core/TypeLists/QueueActionType";
+import Game from "../../Core/Game";
+import type QueueAction from "../../Core/Interfaces/QueueActionInterface";
+import QueueActionType from "../../Core/TypeLists/QueueActionType";
+import CRTCopmonent from "../Partials/CRTComponent";
 
 export default function AnimationScreenComponent() {
     const [enableAnimation, setEnableAnimation] = useState(Game.getInstance().getIsRunning());
@@ -43,24 +44,25 @@ export default function AnimationScreenComponent() {
             icon = '';
     }
 
-    return (
-        <div className="justify-center items-center flex h-full">
-            <div className="crt flex h-full w-full justify-center items-center">
-                <div className="cube-container">
-                    <div className={ enableAnimation ? "cube" : "cube stopped" }>
-                        <div className={ enableAnimation ? "face front" : "face front stopped" }></div>
-                        <div className={ enableAnimation ? "face back" : "face back stopped" }></div>
-                        <div className={ enableAnimation ? "face right" : "face right stopped" }></div>
-                        <div className={ enableAnimation ? "face left" : "face left stopped" }></div>
-                        <div className={ enableAnimation ? "face top" : "face top stopped" }></div>
-                        <div className={ enableAnimation ? "face bottom" : "face bottom stopped" }></div>
-                    </div>
-                </div>
-                <div className="absolute flex justify-center items-center flex-col font-mono">
-                    <span className="crt-text">{currentAction.description}</span>
-                    <span className="crt-text text-7xl" dangerouslySetInnerHTML={{ __html: icon }}></span>
+    let content = (
+    <div className="justify-center items-center flex h-full w-full">
+        <div className="flex h-full w-full justify-center items-center">
+            <div className="cube-container">
+                <div className={ enableAnimation ? "cube" : "cube stopped" }>
+                    <div className={ enableAnimation ? "face front" : "face front stopped" }></div>
+                    <div className={ enableAnimation ? "face back" : "face back stopped" }></div>
+                    <div className={ enableAnimation ? "face right" : "face right stopped" }></div>
+                    <div className={ enableAnimation ? "face left" : "face left stopped" }></div>
+                    <div className={ enableAnimation ? "face top" : "face top stopped" }></div>
+                    <div className={ enableAnimation ? "face bottom" : "face bottom stopped" }></div>
                 </div>
             </div>
+            <div className="absolute flex justify-center items-center flex-col font-mono">
+                <span className="crt-text">{currentAction.description}</span>
+                <span className="crt-text text-7xl" dangerouslySetInnerHTML={{ __html: icon }}></span>
+            </div>
         </div>
-    );
+    </div>);
+
+    return <CRTCopmonent content={content} />;
 }
