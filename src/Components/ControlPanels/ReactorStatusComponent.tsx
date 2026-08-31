@@ -16,8 +16,9 @@ export default function ReactorStatusComponent() {
     }, []);
 
     let content = <div className="justify-center items-center flex h-full">
-            <div className="flex h-full w-full justify-center items-center">
-                <div className="crt-text">{reactorFuelArrayHeat}</div>
+            <div className="flex flex-col h-full w-full">
+                <div className="crt-text text-xl">FUEL ARRAY TEMPERATURE: {reactorFuelArrayHeat}&#xb0;</div>
+                <div className="crt-text text-xl">FUEL ARRAY IRRADIATED: 20R</div>
             </div>
         </div>
     return <CRTCopmonent content={content} />

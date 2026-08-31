@@ -21,11 +21,17 @@ export default function QueuedActionsComponent() {
         };
     }, []);
 
-    let content = (<div className="flex flex-col-reverse font-mono font-thin mx-1">
-                {queuedActions.map((actionDescription: string, index) => (
-                    <div key={index} className="crt-text text-sm">{actionDescription}</div>
-                ))}
-            </div>);
+    let content = (
+    <div className="flex flex-col-reverse font-mono font-thin mx-1">
+        {queuedActions.map((actionDescription: string, index) => (
+            <div>
+                <div key={index} className="crt-text text-sm">{actionDescription}</div>
+                <hr />
+            </div>
+        ))}
+        <hr />
+        <div className="crt-text">QUEUE</div>
+    </div>);
 
     return <CRTCopmonent content={content} />
 }
