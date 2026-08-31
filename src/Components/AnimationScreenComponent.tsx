@@ -57,8 +57,8 @@ export default function AnimationScreenComponent() {
                     </div>
                 </div>
                 <div className="absolute flex justify-center items-center flex-col font-mono">
-                    <span>{currentAction.description}</span>
-                    <span className="text-7xl" dangerouslySetInnerHTML={{ __html: icon }}></span>
+                    <span className="crt-text">{currentAction.description}</span>
+                    <span className="crt-text text-7xl" dangerouslySetInnerHTML={{ __html: icon }}></span>
                 </div>
             </div>
         </div>

@@ -14,5 +14,11 @@ export default function ReactorStatusComponent() {
         };
     }, []);
 
-    return <div className="text-amber-50">{reactorFuelArrayHeat}</div>
+    return (
+        <div className="justify-center items-center flex h-full">
+            <div className="crt flex h-full w-full justify-center items-center">
+                <div className="crt-text">{reactorFuelArrayHeat}</div>
+            </div>
+        </div>
+    );
 }
