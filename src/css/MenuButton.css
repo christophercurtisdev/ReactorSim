@@ -16,7 +16,7 @@
   display: block;
   position: relative;
   height: var(--size);
-  background-color: oklch(47.6% 0.114 61.907);
+  background-color: var(--color-mauve-800);
   border-radius: 100%;
   cursor: pointer;
   padding: 5px;

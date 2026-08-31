@@ -68,6 +68,14 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
         //     <NixieHtmlEntity nixieIcons={icons} litIcon={litIcon} />
         // </div>
         <div className='flex flex-row-reverse justify-center items-center'>
+            <div className="fuel-indicator">
+                <span className='fuel-indicator-bar rounded border-4 border-t-mauve-900 border-l-mauve-900 border-b-mauve-700 border-r-mauve-700 w-4 top-2'></span>
+                <span className='fuel-indicator-bar lit rounded border-4 border-t-mauve-900 border-l-mauve-900 border-b-mauve-700 border-r-mauve-700 w-4 top-4'></span>
+                <span className='fuel-indicator-bar lit rounded border-4 border-t-mauve-900 border-l-mauve-900 border-b-mauve-700 border-r-mauve-700 w-4 top-6'></span>
+                <span className='fuel-indicator-bar lit rounded border-4 border-t-mauve-900 border-l-mauve-900 border-b-mauve-700 border-r-mauve-700 w-4 top-8'></span>
+                <span className='fuel-indicator-bar lit rounded border-4 border-t-mauve-900 border-l-mauve-900 border-b-mauve-700 border-r-mauve-700 w-4 top-10'></span>
+                <span className='fuel-indicator-bar lit rounded border-4 border-t-mauve-900 border-l-mauve-900 border-b-mauve-700 border-r-mauve-700 w-4 top-12'></span>
+            </div>
             <div className='w-16'>
                 <CRTCopmonent content={labelDisplay} border={false} />
             </div>

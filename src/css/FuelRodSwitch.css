@@ -154,3 +154,20 @@
     height: 20px;
     line-height: 20px;
 }
+
+.fuel-indicator {
+    position: relative;
+    min-width: 20px;
+    min-height: 100%; 
+}
+
+.fuel-indicator-bar {
+    position: absolute;
+    min-height: 10px;
+    content: '';
+    background-color: var(--color-mauve-600);
+}
+
+.fuel-indicator-bar.lit {
+    background-color: var(--color-green-500);
+}
