@@ -10,7 +10,7 @@ class FuelArray implements TemperatureSensitivity, Ticks {
     mass: number;
     ambientTemperature: number;
     temperatureBleedRate: number;
-    heatTransferImpotence: number;
+    heatTransferImpedance: number;
 
     fuelRods: Array<Array<FuelRod>> = new Array<Array<FuelRod>>;
 
@@ -18,13 +18,13 @@ class FuelArray implements TemperatureSensitivity, Ticks {
     columns: number;
 
     constructor() {
-        this.temperature = 0;
+        this.temperature = 30;
         this.minimumTemperature = 0;
-        this.maximumTemperature = 0;
+        this.maximumTemperature = 100;
         this.mass = 50;
         this.ambientTemperature = 30;
         this.temperatureBleedRate = 1;
-        this.heatTransferImpotence = 10;
+        this.heatTransferImpedance = 10;
         
         this.rows = 5;
         this.columns = 5;
@@ -55,7 +55,7 @@ class FuelArray implements TemperatureSensitivity, Ticks {
             if (rod.getEngaged()) {
                 // hotter or colder * mass differential * (heat differential / heat transfer impotence)
                 // The hotter colder and heat diff component can be combined but I like how this looks more.
-                heatChange += Math.sign(rod.temperature - this.temperature) * (rod.mass / this.mass) * ((Math.abs(rod.temperature - this.temperature) / this.heatTransferImpotence));
+                heatChange += Math.sign(rod.temperature - this.temperature) * (rod.mass / this.mass) * ((Math.abs(rod.temperature - this.temperature) / this.heatTransferImpedance));
             }
         });
         heatChange += (Math.sign(this.ambientTemperature - this.temperature) * this.temperatureBleedRate);
@@ -100,7 +100,7 @@ class FuelArray implements TemperatureSensitivity, Ticks {
         }    
     }
 
-    getRod(rodNumber: number): FuelRod | boolean {
+    getRod(rodNumber: number): FuelRod {
         for(let column = 0; column < this.columns; column ++) {
             for(let row = 0; row < this.rows; row++) {
                 if (this.fuelRods[column][row].rodNumber == rodNumber) {
@@ -108,7 +108,6 @@ class FuelArray implements TemperatureSensitivity, Ticks {
                 }
             }
         }
-        return false;
     }
 
     getRodNeighbours(rodNumber: number): Array<FuelRod | null> {

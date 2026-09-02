@@ -1,18 +1,32 @@
-import type Parabola from "./Interfaces/ParabolaInterface";
-import type Sigmoid from "./Interfaces/SigmoidInterface";
+interface Parabola {
+    x: number;
+    exponent?: number;
+    a?: number;
+    b?: number;
+    c?: number;
+}
+
+interface Sigmoid {
+    x: number;
+    a?: number;
+    b?: number;
+    c?: number;
+    d?: number;
+}
 
 abstract class CorrelationSolver {
 
     /**
-     * a / ( 1 + ( e^(b - cx) ) ) )
+     * (a / ( 1 + ( e^(b - cx) ) ) ) ) + d
      * @param x 
      * @param a 
      * @param b 
      * @param c 
+     * @param d 
      * @returns 
      */
-    static sigmoid({x, a = 1, b = 0, c = 10}: Sigmoid): number {
-        let y = a / ( 1 + (Math.pow(Math.E,b - (c*x))));
+    static sigmoid({x, a = 1, b = 0, c = 10, d = 0}: Sigmoid): number {
+        let y = (a / ( 1 + (Math.pow(Math.E,b + (c*x))))) + d;
         return y;
     }
 

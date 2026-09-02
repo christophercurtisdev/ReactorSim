@@ -14,7 +14,7 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
     mass: number;
     ambientTemperature: number;
     temperatureBleedRate: number;
-    heatTransferImpotence: number;
+    heatTransferImpedance: number;
 
     roentgen: number;
     maximumRoentgen: number;
@@ -29,11 +29,13 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
     constructor(fuelArray: FuelArray, fuelType: string = null, rodNumber: number = 0, label: string = null) {
         this.temperature = 40;
         this.ambientTemperature = 40;
-        this.minimumTemperature = 10;
+        this.minimumTemperature = 0;
         this.maximumTemperature = 100;
         this.mass = 1;
         this.roentgen = 1;
+        this.maximumRoentgen = 50;
         this.fuelArray = fuelArray;
+        this.temperatureBleedRate = 0.05;
 
         if(FuelType.isValidFuelType(fuelType)) {
             this.fuelType = fuelType
@@ -48,14 +50,44 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
 
     updateRoentgen(): void {
         // TEST VALUES
-        let heatImpact = CorrelationSolver.parabola({x: this.temperature / this.maximumTemperature, exponent: 4, a: 1, b: 0,c: -0.03});
+        let heatImpact = this.heatRoentgenImpact();
+        let controlRodImpact = this.controlRodRoentgenImpact();
+        let newRoentgen = this.roentgen + heatImpact + controlRodImpact;
+        this.roentgen = newRoentgen > 0 ? newRoentgen : 0;
+    }
+
+    private heatRoentgenImpact(normalised: boolean = true) {
+        // Normalise heat
+        let x;
+        if (normalised) {
+            let heatSpread = this.maximumTemperature - this.minimumTemperature;
+            let relativeTemperature = this.temperature - this.minimumTemperature;
+            x = relativeTemperature / heatSpread;
+        } else {
+            x = 0; // Dunno how to do none normalised heat yet, not needed in my current line of thinking though
+        }
+
+        // Heat Parabola
+        let heatParabolaParameters = {x: x, exponent: 4, a: 1, b: 0,c: 0};
+        
+        let heatImpact = CorrelationSolver.parabola(heatParabolaParameters);
+        return heatImpact;
+    }
+
+    private controlRodRoentgenImpact(normalised: boolean = true) {
         let engagedNeighbours = this.fuelArray.getRodNeighbours(this.rodNumber).filter((rod) => rod == null ? false : rod.getEngaged()).length;
-        let controlRodImpact = CorrelationSolver.sigmoid({x: engagedNeighbours, a: -1, b: 5.5, c: -2});
-        console.log(controlRodImpact);
+
+        // Normalise neighbours (eg, 1 control neighbour = 0.25, 3 control neighbours = 0.75, 4 control neighbours = 1)
+        let x = normalised ? engagedNeighbours / 4 : engagedNeighbours; 
+
+        // Control Rod Sigmoid
+        let controlRodSigmoidParameters = {x: x, a: -1.05, b: 4.5, c: -8.9, d: 0.05};
+
+        let controlRodImpact = CorrelationSolver.sigmoid(controlRodSigmoidParameters);
+        return controlRodImpact;
     }
 
     tick(): void {
-        this.roentgen = this.engaged ? 1 : 0;
         this.updateTemperature();
         this.updateRoentgen();
     }
@@ -73,7 +105,17 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
     }
 
     updateTemperature(): void {
-        this.temperature = this.engaged ? 100 : 40;
+        if (this.engaged) {
+            this.temperature += this.roentgenTemperatureImpact() - this.temperatureBleedRate;
+        }
+    }
+
+    private roentgenTemperatureImpact(normalised: boolean = true): number {
+        let relativeRoentgen = this.roentgen / this.maximumRoentgen;
+
+        let radiationParabolaParameters = {x: relativeRoentgen, exponent: 5, a: 1, b: 0, c: 0}
+        let radiationImpact = CorrelationSolver.parabola(radiationParabolaParameters);
+        return radiationImpact;
     }
 
     status() {
