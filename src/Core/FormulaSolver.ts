@@ -1,3 +1,5 @@
+import type TemperatureSensitivity from "../Reactor/Interfaces/TemperatureSensitivityInterface";
+
 interface Parabola {
     x: number;
     exponent?: number;
@@ -14,7 +16,10 @@ interface Sigmoid {
     d?: number;
 }
 
-abstract class CorrelationSolver {
+abstract class FormulaSolver {
+
+    static maxTemperatureChange = 10;
+    static maxRoentgenChange = 10;
 
     /**
      * (a / ( 1 + ( e^(b - cx) ) ) ) ) + d
@@ -39,9 +44,13 @@ abstract class CorrelationSolver {
      * @returns 
      */
     static parabola({x, exponent = 2, a = 1, b = 0, c = 0}: Parabola): number {
-        let y = Math.pow(a * x, exponent) + (b*x) + c;
+        let y = (a * Math.pow(x, exponent)) + (b*x) + c;
         return y;
+    }
+
+    static calculateTemperatureBleedRate(tempObject: TemperatureSensitivity) {
+        return Math.sign(tempObject.ambientTemperature - tempObject.temperature) * tempObject.temperatureBleedRate;
     }
 }
 
-export default CorrelationSolver;
+export default FormulaSolver;

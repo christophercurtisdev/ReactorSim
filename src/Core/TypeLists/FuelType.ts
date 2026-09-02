@@ -1,8 +1,11 @@
+import type FuelTypeInterface from "../Interfaces/FuelTypeInterface";
+
+
 abstract class FuelType {
-    public static URANIUM235 = 'uranium235';
-    public static PLUTONIUM = 'plutonium';
-    public static THORIUM = 'thorium';
-    public static GRAPHITE = 'graphite';
+    public static URANIUM235 = {id: 0, name: 'uranium235',nri: 30};
+    public static PLUTONIUM = {id: 1, name: 'plutonium',nri: 50};
+    public static THORIUM = {id: 2, name: 'thorium',nri: 10};
+    public static GRAPHITE = {id: 3, name: 'graphite',nri: -25};
     public static ALL = [
         this.URANIUM235,
         this.PLUTONIUM,
@@ -10,7 +13,7 @@ abstract class FuelType {
         this.GRAPHITE,
     ];
 
-    public static isValidFuelType(fuelType: string) {
+    public static isValidFuelType(fuelType: FuelTypeInterface) {
         return this.ALL.includes(fuelType);
     }
 }

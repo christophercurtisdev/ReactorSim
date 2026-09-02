@@ -1,3 +1,5 @@
+import FormulaSolver from "../../Core/FormulaSolver";
+import type FuelTypeInterface from "../../Core/Interfaces/FuelTypeInterface";
 import type Ticks from "../../Core/Interfaces/TicksInterface";
 import FuelType from "../../Core/TypeLists/FuelType";
 import type TemperatureSensitivity from "../Interfaces/TemperatureSensitivityInterface";
@@ -53,12 +55,12 @@ class FuelArray implements TemperatureSensitivity, Ticks {
         let heatChange = 0;
         this.listFuelRods().forEach((rod) => {
             if (rod.getEngaged()) {
-                // hotter or colder * mass differential * (heat differential / heat transfer impotence)
+                // hotter or colder * mass differential * (heat differential / heat transfer impedance)
                 // The hotter colder and heat diff component can be combined but I like how this looks more.
                 heatChange += Math.sign(rod.temperature - this.temperature) * (rod.mass / this.mass) * ((Math.abs(rod.temperature - this.temperature) / this.heatTransferImpedance));
             }
         });
-        heatChange += (Math.sign(this.ambientTemperature - this.temperature) * this.temperatureBleedRate);
+        heatChange += FormulaSolver.calculateTemperatureBleedRate(this);
         this.temperature += heatChange;
     }
 
@@ -78,13 +80,13 @@ class FuelArray implements TemperatureSensitivity, Ticks {
         return rods;
     }
 
-    fillWith(fuelType: string = null) {
+    fillWith(fuelType: FuelTypeInterface = null) {
         for(let column = 0; column < this.columns; column ++) {
             for(let row = 0; row < this.rows; row++) {
                 let rodNumber = (column * this.rows) + row;
-                let validatedFuelType = fuelType ?? FuelType.ALL[Math.floor(Math.random() * FuelType.ALL.length)];
+                let validatedFuelType: FuelTypeInterface = fuelType ?? FuelType.ALL[Math.floor(Math.random() * FuelType.ALL.length)];
                 this.fuelRods[column][row] = new FuelRod(this, validatedFuelType, rodNumber);
-                this.fuelRods[column][row].label = String(column) + String(row) + validatedFuelType.substring(0,1);
+                this.fuelRods[column][row].label = String(column) + String(row) + validatedFuelType.name.substring(0,1);
             }
         }
     }
