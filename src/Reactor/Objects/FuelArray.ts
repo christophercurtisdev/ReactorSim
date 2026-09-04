@@ -61,7 +61,7 @@ class FuelArray implements TemperatureSensitivity, Ticks {
             }
         });
         heatChange += FormulaSolver.calculateTemperatureBleedRate(this);
-        this.temperature += heatChange;
+        this.temperature = Math.round((this.temperature + heatChange) * 100) / 100;
     }
 
     getFuelRodAtPosition(row: number, column: number) {

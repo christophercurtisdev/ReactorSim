@@ -9,7 +9,7 @@ export default function ReactorStatusComponent() {
 
     useEffect(() => {
         const unsubscribeFromTickUpdates = Game.getInstance().listenToTickEvents(() => {
-            setReactorFuelArrayHeat(Math.round(Game.getInstance().getFuelArray().temperature));
+            setReactorFuelArrayHeat(Game.getInstance().getFuelArray().temperature);
             setRod6(Game.getInstance().getFuelArray().getRod(6));
         });
 
