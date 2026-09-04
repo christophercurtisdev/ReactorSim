@@ -52,14 +52,9 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
     updateRoentgen(): void {
         // TEST VALUES
         if (this.engaged) {
-            let controlRodTarget = this.controlRodRoentgenImpact() + this.fuelType.nri;
-            let newRoentgen: number = this.roentgen;
-            if(this.roentgen > controlRodTarget) {
-                newRoentgen -= 0.1;
-            } else {
-                newRoentgen += 0.1;
-            }
-            this.roentgen = newRoentgen >= 0 ? newRoentgen : 0;
+            let roentgenTarget = this.controlRodRoentgenImpact() + this.fuelType.nri;
+            let newRoentgen = this.roentgen + Math.sign(roentgenTarget - this.roentgen) * this.fuelType.rcr;
+            this.roentgen = newRoentgen > 0 ? Math.round(newRoentgen * 100) / 100 : 0;
         }
     }
 
@@ -91,9 +86,9 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
         let x = engagedNeighboursNRI;
 
         // Control Rod Sigmoid
-        let controlRodSigmoidParameters = {x: x, a: -1.05, b: 4.5, c: -8.9, d: 0.05};
+        // let controlRodSigmoidParameters = {x: x, a: -1.05, b: 4.5, c: -8.9, d: 0.05};
 
-        let controlRodImpact = FormulaSolver.sigmoid(controlRodSigmoidParameters);
+        // let controlRodImpact = FormulaSolver.sigmoid(controlRodSigmoidParameters);
         return x;
     }
 
@@ -124,6 +119,7 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
             }
             this.temperature = newTemperature > 0 ? newTemperature : 0;
         }
+        this.temperature = Math.round(this.temperature * 100) / 100;
     }
 
     private roentgenTemperatureImpact(normalised: boolean = true): number {
