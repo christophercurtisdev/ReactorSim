@@ -15,7 +15,7 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
     icons[FuelRodStatus.HEALTHY] = ['&#x269b;', 'blue']; // Active
     icons[FuelRodStatus.IRRADIATED] = ['&#x2622;', 'green']; // Irradiated
     icons[FuelRodStatus.HOT] = ['&#x2668;', 'red']; // Hot
-    icons[3] = ['&#x267a;', 'white']; // ???
+    icons[FuelRodStatus.COLD] = ['&#x2744;', 'white']; // Cold
 
     useEffect(() => {
         const game = Game.getInstance();
