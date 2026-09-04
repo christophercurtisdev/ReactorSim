@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Game from '../../Core/Game';
-import FuelType from '../../Core/TypeLists/FuelType';
 import FuelRod from '../../Reactor/Objects/FuelRod';
 import NixieHtmlEntity from '../Partials/NixieHtmlEntityComponent';
 import FuelRodStatus from '../../Core/TypeLists/FuelRodStatus';
@@ -66,7 +65,7 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
                 <span className='fuel-indicator-bar lit rounded border-4 border-t-mauve-900 border-l-mauve-900 border-b-mauve-700 border-r-mauve-700 w-4 top-12'></span>
             </div>
             <div className='w-16'>
-                <CRTCopmonent content={labelDisplay} border={false} />
+                <CRTCopmonent content={labelDisplay} border={false} vignette={false} />
             </div>
             <label className="tgl-43">
                 <input className="tgl-43__input" type="checkbox" onChange={onSwitchToggle} />

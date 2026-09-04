@@ -1,9 +1,9 @@
 .crt {
   color: #33ff33;
-  background: #0a0a0a;
+  background: radial-gradient(#222 1%,#0a0a0a);
   position: relative;
   overflow: hidden;
-
+  border-radius: 5px
 }
 
 .crt::after {
@@ -22,6 +22,11 @@
                     rgba(255, 255, 255, 0.01) 50%);
   background-size: 100% 4px, 24px 100%;
   pointer-events: none;
+  box-shadow: 0 0 100px rgba(0,0,0,0.9) inset;
+}
+
+.crt.no-vignette::after {
+  box-shadow: none;
 }
 
 .crt-text {

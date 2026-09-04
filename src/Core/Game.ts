@@ -2,6 +2,7 @@ import FuelArray from "../Reactor/Objects/FuelArray";
 import FuelRod from "../Reactor/Objects/FuelRod";
 import Reactor from "../Reactor/Objects/Reactor";
 import ActionQueue from "./ActionQueue";
+import GameRound from "./GameRound";
 import type QueueAction from "./Interfaces/QueueActionInterface";
 import TickSystem from "./TickSystem";
 import FuelType from "./TypeLists/FuelType";
@@ -11,6 +12,7 @@ class Game {
 
     private reactor: Reactor;
     private actionQueue: ActionQueue;
+    private currentGameRound: GameRound;
 
     private constructor() {
         this.reactor = new Reactor();
@@ -39,7 +41,10 @@ class Game {
     }
 
     tick() {
-        this.reactor.tick();
+        if (this.currentGameRound) {
+            this.reactor.tick();
+            this.currentGameRound.tick();
+        }
     }
 
     pushToActionQueue(action: QueueAction) {
@@ -88,6 +93,14 @@ class Game {
 
     listenToTickEvents(listener: (tickCount: number) => void) {
         return TickSystem.getInstance().subscribeToTickEvents(listener);
+    }
+
+    newRound() {
+        this.currentGameRound = new GameRound();
+    }
+
+    endRound() {
+        this.currentGameRound = null;
     }
 }
 
