@@ -29,7 +29,7 @@ export default function NixieHtmlEntity({ nixieIcons, litIcon = -1 }: NixieHtmlE
         if (index == litIcon) {
             nixieClass = 'z-50 text-neon-'+icon[1]+nixieIconClass;
         } else {
-            nixieClass = 'text-unlit-neon' + nixieIconClass;
+            nixieClass = 'text-unlit-neon opacity-50' + nixieIconClass;
         }
 
         return (<div key={index} className={nixieClass} dangerouslySetInnerHTML={{ __html: icon[0] }} />)

@@ -41,8 +41,9 @@ class Game {
     }
 
     tick() {
+        this.reactor.tick();
         if (this.currentGameRound) {
-            this.reactor.tick();
+            
             this.currentGameRound.tick();
         }
     }
