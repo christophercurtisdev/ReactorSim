@@ -61,6 +61,11 @@ export default function AnimationScreenComponent() {
                 <span className="crt-text">{currentAction.description}</span>
                 <span className="crt-text text-7xl" dangerouslySetInnerHTML={{ __html: icon }}></span>
             </div>
+            <div className="svg-spin-container">
+                <div className="svg-spin">
+                    <img src="/public/test.svg" alt="" />
+                </div>
+            </div>
         </div>
     </div>);
 

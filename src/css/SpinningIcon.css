@@ -1,0 +1,30 @@
+.svg-spin-container {
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    margin-inline: auto; 
+    width: fit-content;
+}
+
+.svg-spin {
+    position: relative;
+    perspective: 800px;
+    height: 24px;
+    width: 24px;
+}
+
+.svg-spin img {
+    transform: rotateX(30deg);
+    position: absolute;
+    animation: spin 8s infinite
+}
+
+@keyframes spin {
+    0% {
+        transform: rotateX(0) rotateY(0) rotateZ(0);
+    }
+
+    100% {
+        transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+}
