@@ -1,0 +1,202 @@
+.clock {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.clock-increment {
+    height: 100%;
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    margin-inline: auto; 
+    width: fit-content;
+}
+
+
+/* To be clear, I did this by hand specifically beacuse this is exactly how SCSS compiles a for loop */
+.clock-increment:nth-of-type(1) {
+    transform: rotateZ(calc(6deg * 1));
+}
+.clock-increment:nth-of-type(2) {
+    transform: rotateZ(calc(6deg * 2));
+}
+.clock-increment:nth-of-type(3) {
+    transform: rotateZ(calc(6deg * 3));
+}
+.clock-increment:nth-of-type(4) {
+    transform: rotateZ(calc(6deg * 4));
+}
+.clock-increment:nth-of-type(5) {
+    transform: rotateZ(calc(6deg * 5));
+}
+.clock-increment:nth-of-type(6) {
+    transform: rotateZ(calc(6deg * 6));
+}
+.clock-increment:nth-of-type(7) {
+    transform: rotateZ(calc(6deg * 7));
+}
+.clock-increment:nth-of-type(8) {
+    transform: rotateZ(calc(6deg * 8));
+}
+.clock-increment:nth-of-type(9) {
+    transform: rotateZ(calc(6deg * 9));
+}
+.clock-increment:nth-of-type(10) {
+    transform: rotateZ(calc(6deg * 10));
+}
+
+.clock-increment:nth-of-type(11) {
+    transform: rotateZ(calc(6deg * 11));
+}
+.clock-increment:nth-of-type(12) {
+    transform: rotateZ(calc(6deg * 12));
+}
+.clock-increment:nth-of-type(13) {
+    transform: rotateZ(calc(6deg * 13));
+}
+.clock-increment:nth-of-type(14) {
+    transform: rotateZ(calc(6deg * 14));
+}
+.clock-increment:nth-of-type(15) {
+    transform: rotateZ(calc(6deg * 15));
+}
+.clock-increment:nth-of-type(16) {
+    transform: rotateZ(calc(6deg * 16));
+}
+.clock-increment:nth-of-type(17) {
+    transform: rotateZ(calc(6deg * 17));
+}
+.clock-increment:nth-of-type(18) {
+    transform: rotateZ(calc(6deg * 18));
+}
+.clock-increment:nth-of-type(19) {
+    transform: rotateZ(calc(6deg * 19));
+}
+.clock-increment:nth-of-type(20) {
+    transform: rotateZ(calc(6deg * 20));
+}
+
+.clock-increment:nth-of-type(21) {
+    transform: rotateZ(calc(6deg * 21));
+}
+.clock-increment:nth-of-type(22) {
+    transform: rotateZ(calc(6deg * 22));
+}
+.clock-increment:nth-of-type(23) {
+    transform: rotateZ(calc(6deg * 23));
+}
+.clock-increment:nth-of-type(24) {
+    transform: rotateZ(calc(6deg * 24));
+}
+.clock-increment:nth-of-type(25) {
+    transform: rotateZ(calc(6deg * 25));
+}
+.clock-increment:nth-of-type(26) {
+    transform: rotateZ(calc(6deg * 26));
+}
+.clock-increment:nth-of-type(27) {
+    transform: rotateZ(calc(6deg * 27));
+}
+.clock-increment:nth-of-type(28) {
+    transform: rotateZ(calc(6deg * 28));
+}
+.clock-increment:nth-of-type(29) {
+    transform: rotateZ(calc(6deg * 29));
+}
+.clock-increment:nth-of-type(30) {
+    transform: rotateZ(calc(6deg * 30));
+}
+
+.clock-increment:nth-of-type(31) {
+    transform: rotateZ(calc(6deg * 31));
+}
+.clock-increment:nth-of-type(32) {
+    transform: rotateZ(calc(6deg * 32));
+}
+.clock-increment:nth-of-type(33) {
+    transform: rotateZ(calc(6deg * 33));
+}
+.clock-increment:nth-of-type(34) {
+    transform: rotateZ(calc(6deg * 34));
+}
+.clock-increment:nth-of-type(35) {
+    transform: rotateZ(calc(6deg * 35));
+}
+.clock-increment:nth-of-type(36) {
+    transform: rotateZ(calc(6deg * 36));
+}
+.clock-increment:nth-of-type(37) {
+    transform: rotateZ(calc(6deg * 37));
+}
+.clock-increment:nth-of-type(38) {
+    transform: rotateZ(calc(6deg * 38));
+}
+.clock-increment:nth-of-type(39) {
+    transform: rotateZ(calc(6deg * 39));
+}
+.clock-increment:nth-of-type(40) {
+    transform: rotateZ(calc(6deg * 40));
+}
+
+.clock-increment:nth-of-type(41) {
+    transform: rotateZ(calc(6deg * 41));
+}
+.clock-increment:nth-of-type(42) {
+    transform: rotateZ(calc(6deg * 42));
+}
+.clock-increment:nth-of-type(43) {
+    transform: rotateZ(calc(6deg * 43));
+}
+.clock-increment:nth-of-type(44) {
+    transform: rotateZ(calc(6deg * 44));
+}
+.clock-increment:nth-of-type(45) {
+    transform: rotateZ(calc(6deg * 45));
+}
+.clock-increment:nth-of-type(46) {
+    transform: rotateZ(calc(6deg * 46));
+}
+.clock-increment:nth-of-type(47) {
+    transform: rotateZ(calc(6deg * 47));
+}
+.clock-increment:nth-of-type(48) {
+    transform: rotateZ(calc(6deg * 48));
+}
+.clock-increment:nth-of-type(49) {
+    transform: rotateZ(calc(6deg * 49));
+}
+.clock-increment:nth-of-type(50) {
+    transform: rotateZ(calc(6deg * 50));
+}
+
+.clock-increment:nth-of-type(51) {
+    transform: rotateZ(calc(6deg * 51));
+}
+.clock-increment:nth-of-type(52) {
+    transform: rotateZ(calc(6deg * 52));
+}
+.clock-increment:nth-of-type(53) {
+    transform: rotateZ(calc(6deg * 53));
+}
+.clock-increment:nth-of-type(54) {
+    transform: rotateZ(calc(6deg * 54));
+}
+.clock-increment:nth-of-type(55) {
+    transform: rotateZ(calc(6deg * 55));
+}
+.clock-increment:nth-of-type(56) {
+    transform: rotateZ(calc(6deg * 56));
+}
+.clock-increment:nth-of-type(57) {
+    transform: rotateZ(calc(6deg * 57));
+}
+.clock-increment:nth-of-type(58) {
+    transform: rotateZ(calc(6deg * 58));
+}
+.clock-increment:nth-of-type(59) {
+    transform: rotateZ(calc(6deg * 59));
+}
+.clock-increment:nth-of-type(60) {
+    transform: rotateZ(calc(6deg * 60));
+}
