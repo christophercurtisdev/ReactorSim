@@ -5,12 +5,14 @@ import FuelRod from "../../Reactor/Objects/FuelRod";
 
 export default function ReactorStatusComponent() {
     const [reactorFuelArrayHeat, setReactorFuelArrayHeat] = useState(0);
-    const [rod6, setRod6] = useState({} as FuelRod);
+    const [reactorFuelArrayRoentgen, setReactorFuelArrayRoentgen] = useState(0);
+    const [selectedRod, setSelectedRod] = useState({} as FuelRod);
 
     useEffect(() => {
         const unsubscribeFromTickUpdates = Game.getInstance().listenToTickEvents(() => {
             setReactorFuelArrayHeat(Game.getInstance().getFuelArray().temperature);
-            setRod6(Game.getInstance().getFuelArray().getRod(6));
+            setReactorFuelArrayRoentgen(Game.getInstance().getFuelArray().getTotalRoentgen());
+            setSelectedRod(Game.getInstance().getFuelArray().getRod(6));
         });
 
         return () => {
@@ -20,11 +22,13 @@ export default function ReactorStatusComponent() {
 
     let content = <div className="justify-center items-center flex h-full">
             <div className="flex flex-col h-full w-full">
-                <div className="crt-text text-xl">FUEL ARRAY TEMPERATURE: {reactorFuelArrayHeat}&#xb0;</div>
-                <div className="crt-text text-xl">FUEL ARRAY IRRADIATED: 20R</div>
+                <div className="flex text-xs justify-between">
+                    <div className="crt-text">FUEL ARRAY INFORMATION: </div>
+                    <div className="crt-text">|{Math.round(reactorFuelArrayHeat)}&deg;|{reactorFuelArrayRoentgen}R|100&#x2661;</div>
+                </div> 
                 <hr />
-                <div className="crt-text text-xl">FUEL ROD 6 TEMPERATURE: {rod6.temperature}</div>
-                <div className="crt-text text-xl">FUEL ROD 6 ROENTGEN: {rod6.roentgen}</div>
+                <div className="crt-text text-xl">FUEL ROD 6 TEMPERATURE: {selectedRod.temperature}</div>
+                <div className="crt-text text-xl">FUEL ROD 6 ROENTGEN: {selectedRod.roentgen}</div>
             </div>
         </div>
     return <CRTCopmonent content={content} />

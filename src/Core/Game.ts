@@ -14,6 +14,7 @@ class Game {
     private reactor: Reactor;
     private actionQueue: ActionQueue;
     private currentGameRound: GameRound;
+    private roundStopStartListeners: Set<(isRunning: boolean) => void> = new Set();
 
     private constructor() {
         this.reactor = new Reactor();
@@ -30,8 +31,6 @@ class Game {
         this.reactor.getFuelArray().setRod(rod6);
         this.reactor.getFuelArray().setRod(rod7);
         this.reactor.getFuelArray().setRod(rod11);
-
-        console.log(this.reactor.getFuelArray().getRodNeighbours(6));
     }
 
     static getInstance(): Game {
@@ -97,12 +96,33 @@ class Game {
         return TickSystem.getInstance().subscribeToTickEvents(listener);
     }
 
+    listenToRoundStartStopEvents(listener: (isRunning: boolean) => void) {
+        this.roundStopStartListeners.add(listener);
+        return () => {
+            this.roundStopStartListeners.delete(listener);
+        };
+    }
+
+    private notifyRoundStartStopListeners(isRunning: boolean): void {
+        this.roundStopStartListeners.forEach((listener) => listener(isRunning));
+    }
+
     newRound() {
-        this.currentGameRound = new GameRound();
+        if (this.currentGameRound == null) {
+            this.currentGameRound = new GameRound();
+            this.notifyRoundStartStopListeners(true);
+        }
     }
 
     endRound() {
-        this.currentGameRound = null;
+        if (this.currentGameRound != null) {
+            this.currentGameRound = null;
+            this.notifyRoundStartStopListeners(false);
+        }
+    }
+
+    getCurrentGameRound() {
+        return this.currentGameRound;
     }
 
     engageFuelRod(fuelRod: FuelRod) {

@@ -12,8 +12,9 @@ function resumeGame(): void {
 
 export default function MenuButtonsComponent() {
     const [gameRunning, setGameRunning] = useState(false);
+    const [roundRunning, setRoundRunning] = useState(false);
 
-    function toggleRunning() {
+    function toggleGameRunning() {
         return Game.getInstance().getIsRunning() ? pauseGame() : resumeGame();
     }
 
@@ -27,9 +28,14 @@ export default function MenuButtonsComponent() {
             setGameRunning(isRunning);
         });
 
+        const unsubscribeFromRoundStopStartEvents = Game.getInstance().listenToRoundStartStopEvents((isRunning) => {
+            setRoundRunning(isRunning);
+        });
+
         return () => {
             // Unsubscribe from this component
             unsubscribeFromStopStartUpdates();
+            unsubscribeFromRoundStopStartEvents();
         };
     }, []);
 
@@ -38,8 +44,8 @@ export default function MenuButtonsComponent() {
 
     return (
         <div className="flex h-full justify-between p-2">
-            <SoftRecessLatchingButton onCheck={toggleRunning} onUncheck={toggleRunning} checked={gameRunning} icon={playSvg}/>
-            <SoftRecessLatchingButton onCheck={newRound} icon={nextSvg}/>
+            <SoftRecessLatchingButton onCheck={toggleGameRunning} onUncheck={toggleGameRunning} checked={gameRunning} icon={playSvg}/>
+            <SoftRecessLatchingButton onCheck={newRound} icon={nextSvg} checked={roundRunning} />
         </div>
     );
 }

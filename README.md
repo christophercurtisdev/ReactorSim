@@ -13,11 +13,13 @@ React and Tailwind for front end.
 ```npm install```
 ```npm run dev```
 
+**No extra packages *currently* other than React**, would like to keep it that way but it will depend how inefficient/ complex this code is.
+
 ---
 
 # Game Details
 
-Current thoughts on gameplay:
+###Current thoughts on gameplay:
 - **Queue**
     1. Queue actions to do stuff, each action takes a set amount of ticks, you cannot rearrange the queue or remove items in the queue.
     2. Some actions are forced (like disengaging rods when they're too hot for example) in which case the rod will do damage to the array until it's disengaged.
@@ -29,3 +31,7 @@ Current thoughts on gameplay:
     - On success, end the day (game round), go to the shop, buy consumables, items, etc.
     - Start the next day with a higher quota.
     - Rinse and repeat with some kind of boss mechanic at specific intervals.
+
+###Maybe's and potentially's
+- **Disable Fuel Rod Toggle**
+    - Might make the game more interesting if you have to just trigger the fuel rod once and can't turn it off until it burns out or gets too hot/ irradiated, this could also work as a boss mechanic or something.

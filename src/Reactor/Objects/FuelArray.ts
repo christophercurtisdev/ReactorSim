@@ -43,12 +43,12 @@ class FuelArray implements TemperatureSensitivity, Ticks {
         this.updateTemperature();
     }
 
-    onExceedMaximumTemperature(): void {
-        
+    hasExceededMaxTemperature(): boolean {
+        return false;
     }
 
-    onExceedMinimumTemperature(): void {
-        
+    hasExceededMinTemperature(): boolean {
+        return false;
     }
 
     updateTemperature(): void {
@@ -126,6 +126,14 @@ class FuelArray implements TemperatureSensitivity, Ticks {
                 }
             }
         }
+    }
+
+    getTotalRoentgen(): number {
+        let totalRoentgen = 0;
+        this.listFuelRods().forEach((rod) => {
+            totalRoentgen += rod.roentgen;
+        });
+        return Math.round(totalRoentgen);
     }
 }
 

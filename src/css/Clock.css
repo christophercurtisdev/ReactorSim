@@ -13,7 +13,7 @@
     width: fit-content;
 }
 
-.big-hand {
+.big-hand-container {
     left: 0; 
     right: 0; 
     margin-inline: auto; 
@@ -21,7 +21,22 @@
     position: absolute;
     height: 100%;
     width: 2px;
-    background: linear-gradient(#0000 5%,red 0%, red 50%, #0000 50%, #0000 100%);
+    padding-top: 10px;
+}
+
+.big-hand {
+    background-color: var(--color-mauve-700); 
+    min-height: 50%;
+}
+
+.big-hand.ticking {
+    box-shadow: 0 0 10px rgba(255,255,255,0.9);
+    background-color: white;
+}
+
+@keyframes tick {
+    from {transform: rotateZ(0);}
+    to {transform: rotateZ(360deg);}
 }
 
 /* To be clear, I did this by hand specifically beacuse this is exactly how SCSS compiles a for loop */
