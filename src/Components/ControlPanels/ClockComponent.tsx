@@ -15,21 +15,21 @@ export default function ClockComponent() {
 
     let increments = [];
     for (let index = 0; index < 60; index++) {
-        increments.push(<div className="clock-increment text-xs text-neon-pink">&#x2303;</div>);
+        increments.push(<div className={roundStarted ? "clock-increment text-xs text-neon-white transition-all" : "clock-increment text-xs text-unlit-neon transition-all"}>&#x2303;</div>);
     }
 
     const gameRound = Game.getInstance().getCurrentGameRound();
 
     let roundTimeInSeconds = roundStarted ? gameRound.getDayLength() / TickSystem.getInstance().getTickRate() : 0;
     let bigHandStyle = {animation: roundStarted ? 'tick '+roundTimeInSeconds+'s infinite linear' : ''};
-    let onShiftSignClass = "w-full text-center font-mono ";
+    let onShiftSignClass = "w-full text-center font-mono transition-all ";
     onShiftSignClass += roundStarted ? "text-neon-yellow" : "text-unlit-neon"
 
     let content = (<div className="w-full h-full">
         <div className={onShiftSignClass}>
             ON SHIFT
         </div>
-        <div className="clock">
+        <div className={roundStarted ? "clock ticking" : "clock"}>
             <div className="big-hand-container" style={bigHandStyle}>
                 <div className={roundStarted ? "big-hand ticking" : "big-hand"}></div>
             </div>

@@ -8,7 +8,7 @@ function App() {
   return (
     <div className='flex w-screen h-screen bg-mauve-800'>
       {/* <TickDebugComponent /> */}
-      <GameDebugComponent />
+      {/* <GameDebugComponent /> */}
       <GameComponent />
     </div>
   );

@@ -1,8 +1,8 @@
 abstract class FuelRodStatus {
-    public static HEALTHY: number = 0;
-    public static IRRADIATED: number = 1;
-    public static HOT: number = 2;
-    public static COLD: number = 3;
+    public static HEALTHY: {id: number, name: string, description: string} = {id: 0, name: 'HEALTHY', description: ''};
+    public static IRRADIATED: {id: number, name: string, description: string} = {id: 1, name: 'IRRADIATED', description: ''};
+    public static HOT: {id: number, name: string, description: string} = {id: 2, name: 'HOT', description: ''};
+    public static COLD: {id: number, name: string, description: string} = {id: 3, name: 'COLD', description: ''};
 }
 
 export default FuelRodStatus;

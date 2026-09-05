@@ -11,10 +11,10 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
     const [disabled, setDisabled] = useState(false);
 
     const icons = [];
-    icons[FuelRodStatus.HEALTHY] = ['&#x269b;', 'blue']; // Active
-    icons[FuelRodStatus.IRRADIATED] = ['&#x2622;', 'green']; // Irradiated
-    icons[FuelRodStatus.HOT] = ['&#x2668;', 'red']; // Hot
-    icons[FuelRodStatus.COLD] = ['&#x2744;', 'white']; // Cold
+    icons[FuelRodStatus.HEALTHY.id] = ['&#x269b;', 'blue']; // Active
+    icons[FuelRodStatus.IRRADIATED.id] = ['&#x2622;', 'green']; // Irradiated
+    icons[FuelRodStatus.HOT.id] = ['&#x2668;', 'red']; // Hot
+    icons[FuelRodStatus.COLD.id] = ['&#x2744;', 'white']; // Cold
 
     useEffect(() => {
         const game = Game.getInstance();
@@ -33,9 +33,9 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
             }
 
             if (fuelRod.getEngaged()) {
-                setLitIcon(disabled ? FuelRodStatus.COLD : fuelRod.status());
+                setLitIcon(disabled ? FuelRodStatus.COLD.id : fuelRod.status().id);
             } else {
-                if (fuelRod.status() == FuelRodStatus.HEALTHY) {
+                if (fuelRod.status().id == FuelRodStatus.HEALTHY.id) {
                     setLitIcon(-1);
                 } else {
                     setLitIcon(3);
