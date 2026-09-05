@@ -13,6 +13,16 @@
     width: fit-content;
 }
 
+.big-hand {
+    left: 0; 
+    right: 0; 
+    margin-inline: auto; 
+    width: fit-content;
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    background: linear-gradient(#0000 5%,red 0%, red 50%, #0000 50%, #0000 100%);
+}
 
 /* To be clear, I did this by hand specifically beacuse this is exactly how SCSS compiles a for loop */
 .clock-increment:nth-of-type(1) {
