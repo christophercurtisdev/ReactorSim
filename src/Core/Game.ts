@@ -106,9 +106,9 @@ class Game {
     }
 
     engageFuelRod(fuelRod: FuelRod) {
-        let action = { 
-            ticks: 30, 
-            action: () => {fuelRod.setEngaged(true) }, 
+        let action = {
+            ticks: 30,
+            action: () => {fuelRod.setEngaged(true) },
             description: fuelRod.label+" Engaging", 
             actionType: QueueActionType.ENGAGE_FUEL_ROD,
             actionObject: fuelRod
