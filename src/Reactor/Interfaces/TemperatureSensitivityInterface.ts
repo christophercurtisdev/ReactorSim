@@ -6,7 +6,7 @@ export default interface TemperatureSensitivity {
     ambientTemperature: number;
     temperatureBleedRate: number;
     heatTransferImpedance: number;
-    onExceedMaximumTemperature(): void;
-    onExceedMinimumTemperature(): void;
+    hasExceededMaxTemperature(): boolean;
+    hasExceededMinTemperature(): boolean;
     updateTemperature(): void;
 }

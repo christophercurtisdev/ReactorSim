@@ -31,7 +31,7 @@ export default function GameComponent() {
         <QueuedActionsComponent />
       </div>
       <div className="row-span-8 col-span-8 p-1">
-          <ClockComponent />
+        <ClockComponent />
       </div>
       <div className="row-span-11 col-span-11 p-1">Use item and consumables</div>
       <div className="row-span-11 col-span-21 p-1">

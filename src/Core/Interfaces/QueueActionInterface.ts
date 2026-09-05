@@ -3,4 +3,5 @@ export default interface QueueAction {
     action: () => void;
     description: string;
     actionType: number;
+    actionObject: {};
 }

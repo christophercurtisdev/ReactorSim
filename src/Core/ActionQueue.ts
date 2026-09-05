@@ -41,17 +41,6 @@ class ActionQueue implements Ticks{
     }
 
     tick(): void {
-        // if (this.currentQueueAction == null) {
-        //     this.processNextQueueAction();
-        // } else {
-        //     if (this.currentQueueAction.ticks > 0) {
-        //         this.currentQueueAction.ticks--;
-        //         return;
-        //     } else {
-        //         this.currentQueueAction.action();
-        //         this.processNextQueueAction();
-        //     }
-        // }
         if (this.currentQueueAction != null) {
             this.currentQueueAction.ticks--;
             if (this.currentQueueAction.ticks <= 0) {
@@ -83,6 +72,12 @@ class ActionQueue implements Ticks{
 
     getActions() {
         return this.actionList;
+    }
+
+    isActionQueued(action: QueueAction): boolean {
+        let actionObjects = this.actionList.map(queueAction => queueAction.actionObject);
+        let actionTypes = this.actionList.map(queueAction => queueAction.actionType);
+        return actionObjects.includes(action.actionObject) && actionTypes.includes(action.actionType);
     }
 }
 

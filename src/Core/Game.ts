@@ -6,6 +6,7 @@ import GameRound from "./GameRound";
 import type QueueAction from "./Interfaces/QueueActionInterface";
 import TickSystem from "./TickSystem";
 import FuelType from "./TypeLists/FuelType";
+import QueueActionType from "./TypeLists/QueueActionType";
 
 class Game {
     private static instance: Game | null = null;
@@ -48,7 +49,7 @@ class Game {
         }
     }
 
-    pushToActionQueue(action: QueueAction) {
+    private pushToActionQueue(action: QueueAction) {
         this.actionQueue.addToQueue(action);
     }
 
@@ -102,6 +103,32 @@ class Game {
 
     endRound() {
         this.currentGameRound = null;
+    }
+
+    engageFuelRod(fuelRod: FuelRod) {
+        let action = { 
+            ticks: 30, 
+            action: () => {fuelRod.setEngaged(true) }, 
+            description: fuelRod.label+" Engaging", 
+            actionType: QueueActionType.ENGAGE_FUEL_ROD,
+            actionObject: fuelRod
+        }
+        this.pushToActionQueue(action);
+    }
+
+    disengageFuelRod(fuelRod: FuelRod, description?: string) {
+        if (fuelRod.getEngaged()) {
+            let action = {
+                ticks: 30,
+                action: () => {fuelRod.setEngaged(false)}, 
+                description: description ?? fuelRod.label+" Disengaging", 
+                actionType: QueueActionType.DISENGAGE_FUEL_ROD,
+                actionObject: fuelRod
+            }
+            if (!this.actionQueue.isActionQueued(action)) {
+                this.pushToActionQueue(action);
+            }
+        }
     }
 }
 

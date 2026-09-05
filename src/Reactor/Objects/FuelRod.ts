@@ -56,6 +56,7 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
             let newRoentgen = this.roentgen + Math.sign(roentgenTarget - this.roentgen) * this.fuelType.rcr;
             this.roentgen = newRoentgen > 0 ? Math.round(newRoentgen * 100) / 100 : 0;
         }
+
     }
 
     private heatRoentgenImpact(normalised: boolean = true) {
@@ -97,16 +98,16 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
         this.updateRoentgen();
     }
 
-    onExceedMaximumRoentgen(): void {
-        console.log("Roentgen Exceeded in Fuel Rod");
+    hasExceededMaxRoentgen(): boolean {
+        return this.roentgen > this.maximumRoentgen;
     }
 
-    onExceedMaximumTemperature(): void {
-        console.log("Max Temp Exceeded in Fuel Rod");
+    hasExceededMaxTemperature(): boolean {
+        return this.temperature > this.maximumTemperature;
     }
 
-    onExceedMinimumTemperature(): void {
-        console.log("Min Temo Exceeded in Fuel Rod");
+    hasExceededMinTemperature(): boolean {
+        return this.temperature < this.minimumTemperature;
     }
 
     updateTemperature(): void {
