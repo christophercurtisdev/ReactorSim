@@ -3,16 +3,15 @@ import Game from "../../Core/Game";
 import CRTCopmonent from "../Partials/CRTComponent";
 import FuelRod from "../../Reactor/Objects/FuelRod";
 
-export default function ReactorStatusComponent() {
+export default function ReactorStatusComponent({rod}: {rod: FuelRod}) {
     const [reactorFuelArrayHeat, setReactorFuelArrayHeat] = useState(0);
     const [reactorFuelArrayRoentgen, setReactorFuelArrayRoentgen] = useState(0);
-    const [selectedRod, setSelectedRod] = useState({} as FuelRod);
+    const [selectedRod] = useState(rod);
 
     useEffect(() => {
         const unsubscribeFromTickUpdates = Game.getInstance().listenToTickEvents(() => {
             setReactorFuelArrayHeat(Game.getInstance().getFuelArray().temperature);
             setReactorFuelArrayRoentgen(Game.getInstance().getFuelArray().getTotalRoentgen());
-            setSelectedRod(Game.getInstance().getFuelArray().getRod(6));
         });
 
         return () => {

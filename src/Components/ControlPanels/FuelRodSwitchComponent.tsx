@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Game from '../../Core/Game';
 import FuelRod from '../../Reactor/Objects/FuelRod';
 import NixieHtmlEntity from '../Partials/NixieHtmlEntityComponent';
 import FuelRodStatus from '../../Core/TypeLists/FuelRodStatus';
 import CRTCopmonent from '../Partials/CRTComponent';
 
-export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
+export default function FuelRodSwitchComponent({fuelRod, updateDetailsPanel}: {fuelRod: FuelRod, updateDetailsPanel: (rod: FuelRod) => void}) {
     const [litIcon, setLitIcon] = useState(-1);
     const [switchIsOn, setSwitchIsOn] = useState(false);
     const [disabled, setDisabled] = useState(false);
@@ -53,8 +53,13 @@ export default function FuelRodSwitchComponent({fuelRod}: {fuelRod: FuelRod}) {
         setSwitchIsOn(!switchIsOn);
     }
 
+    function triggerUpdateDetailsPanel() {
+        updateDetailsPanel(fuelRod);
+    }
+
     let labelDisplay = (
-    <div className='font-thin crt-text'>
+    <div className='font-thin crt-text details-element' onClick={triggerUpdateDetailsPanel}>
+        <div className='absolute h-1 w-1 rounded bg-red-400 right-2 top-2'></div>
         {fuelRod.label}
     </div>
     );
