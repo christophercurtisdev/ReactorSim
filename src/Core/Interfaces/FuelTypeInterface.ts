@@ -3,4 +3,5 @@ export default interface FuelTypeInterface {
     name: string,
     nri: number, // Neighbouring Radiation Impact
     rcr: number, // Roentgen Change Rate (per tick)
+    defaultCapacity: number
 }
