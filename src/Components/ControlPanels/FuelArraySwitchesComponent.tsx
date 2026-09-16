@@ -2,13 +2,13 @@ import Game from '../../Core/Game';
 import type FuelRod from '../../Reactor/Objects/FuelRod';
 import FuelRodSwitchComponent from './FuelRodSwitchComponent';
 
-export default function FuelArraySwitchesComponent({updateDetailsPanel}: {updateDetailsPanel: (rod: FuelRod) => void}) {
+export default function FuelArraySwitchesComponent({updateDetailsPanel, selectedFuelRod}: {updateDetailsPanel: (rod: FuelRod) => void, selectedFuelRod: FuelRod}) {
     let fuelRods = Game.getInstance().getFuelArray().fuelRods;
     return (
         <div className='grid grid-flow-col grid-rows-4 content-center'>
             {fuelRods.map((column) => (
                 column.map((rod) => (
-                    <FuelRodSwitchComponent updateDetailsPanel={updateDetailsPanel} fuelRod={rod}/>
+                    <FuelRodSwitchComponent updateDetailsPanel={updateDetailsPanel} fuelRod={rod} selected={selectedFuelRod.rodNumber == rod.rodNumber}/>
                     // <div>
                     //     <label className="tgl-43">
                     //     <input className="tgl-43__input" type="checkbox" />

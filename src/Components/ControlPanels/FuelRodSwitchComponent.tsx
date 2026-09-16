@@ -5,7 +5,7 @@ import NixieHtmlEntity from '../Partials/NixieHtmlEntityComponent';
 import FuelRodStatus from '../../Core/TypeLists/FuelRodStatus';
 import CRTCopmonent from '../Partials/CRTComponent';
 
-export default function FuelRodSwitchComponent({fuelRod, updateDetailsPanel}: {fuelRod: FuelRod, updateDetailsPanel: (rod: FuelRod) => void}) {
+export default function FuelRodSwitchComponent({fuelRod, updateDetailsPanel, selected}: {fuelRod: FuelRod, updateDetailsPanel: (rod: FuelRod) => void, selected: boolean}) {
     const [litIcon, setLitIcon] = useState(-1);
     const [switchIsOn, setSwitchIsOn] = useState(false);
     const [disabled, setDisabled] = useState(false);
@@ -17,8 +17,6 @@ export default function FuelRodSwitchComponent({fuelRod, updateDetailsPanel}: {f
     icons[FuelRodStatus.COLD.id] = ['&#x2744;', 'white']; // Cold
 
     useEffect(() => {
-        const game = Game.getInstance();
-
         const unsubscribeFromTickUpdates = Game.getInstance().listenToTickEvents(() => {
             if (fuelRod.hasExceededMaxTemperature()) {
                 Game.getInstance().disengageFuelRod(fuelRod, 'TEMP TO HIGH - DISENGAGING '+fuelRod.label)
@@ -57,9 +55,12 @@ export default function FuelRodSwitchComponent({fuelRod, updateDetailsPanel}: {f
         updateDetailsPanel(fuelRod);
     }
 
+    let selectedClassName = 'absolute h-1 w-1 rounded bg-red-400 right-2 top-2 ';
+    selectedClassName += selected ? '' : 'hidden';
+
     let labelDisplay = (
     <div className='font-thin crt-text details-element' onClick={triggerUpdateDetailsPanel}>
-        <div className='absolute h-1 w-1 rounded bg-red-400 right-2 top-2'></div>
+        <div className={selectedClassName}></div>
         {fuelRod.label}
     </div>
     );

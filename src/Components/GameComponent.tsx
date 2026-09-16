@@ -8,12 +8,12 @@ import ReactorStatusComponent from './ControlPanels/ReactorStatusComponent';
 import ClockComponent from './ControlPanels/ClockComponent';
 
 export default function GameComponent() {
-  const [fuelRod, setFuelRod] = useState(Game.getInstance().getFuelArray().getRod(0))
+  const [selectedFuelRod, setSelectedFuelRod] = useState(Game.getInstance().getFuelArray().getRod(0))
 
   useEffect(() => {
     const unsubscribeFromTickUpdates = Game.getInstance().listenToTickEvents(() => {
       Game.getInstance().tick();
-    });
+    }); 
 
     return () => {
       unsubscribeFromTickUpdates();
@@ -23,7 +23,7 @@ export default function GameComponent() {
   return (
     <div className="grid grid-cols-48 grid-rows-32 content-stretch w-full p-3">
       <div className='col-span-32 row-span-14 overflow-x-scroll overflow-y-scroll p-1'>
-        <FuelArraySwitchesComponent updateDetailsPanel={setFuelRod}/>
+        <FuelArraySwitchesComponent selectedFuelRod={selectedFuelRod} updateDetailsPanel={setSelectedFuelRod}/>
       </div>
       <div className="row-span-16 col-span-16 p-1">
         <AnimationScreenComponent />
@@ -37,7 +37,7 @@ export default function GameComponent() {
       </div>
       <div className="row-span-11 col-span-11 p-1">Use item and consumables</div>
       <div className="row-span-11 col-span-21 p-1">
-        <ReactorStatusComponent rod={fuelRod}/>
+        <ReactorStatusComponent key={selectedFuelRod.rodNumber} rod={selectedFuelRod}/>
       </div>
       <div className="row-span-8 col-span-8 p-1">
         <MenuButtonsComponent />

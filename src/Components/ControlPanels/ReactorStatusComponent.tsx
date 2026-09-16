@@ -6,7 +6,7 @@ import FuelRod from "../../Reactor/Objects/FuelRod";
 export default function ReactorStatusComponent({rod}: {rod: FuelRod}) {
     const [reactorFuelArrayHeat, setReactorFuelArrayHeat] = useState(0);
     const [reactorFuelArrayRoentgen, setReactorFuelArrayRoentgen] = useState(0);
-    const [selectedRod] = useState(rod);
+    const [selectedRod, setSelectedRod] = useState(rod);
 
     useEffect(() => {
         const unsubscribeFromTickUpdates = Game.getInstance().listenToTickEvents(() => {
