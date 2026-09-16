@@ -8,7 +8,7 @@ export default function FuelArraySwitchesComponent({updateDetailsPanel, selected
         <div className='grid grid-flow-col grid-rows-4 content-center'>
             {fuelRods.map((column) => (
                 column.map((rod) => (
-                    <FuelRodSwitchComponent updateDetailsPanel={updateDetailsPanel} fuelRod={rod} selected={selectedFuelRod.rodNumber == rod.rodNumber}/>
+                    <FuelRodSwitchComponent key={'rod'+rod.rodNumber} updateDetailsPanel={updateDetailsPanel} fuelRod={rod} selected={selectedFuelRod.rodNumber == rod.rodNumber}/>
                     // <div>
                     //     <label className="tgl-43">
                     //     <input className="tgl-43__input" type="checkbox" />

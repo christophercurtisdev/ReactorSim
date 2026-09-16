@@ -6,7 +6,7 @@ import FuelRod from "../../Reactor/Objects/FuelRod";
 export default function ReactorStatusComponent({rod}: {rod: FuelRod}) {
     const [reactorFuelArrayHeat, setReactorFuelArrayHeat] = useState(0);
     const [reactorFuelArrayRoentgen, setReactorFuelArrayRoentgen] = useState(0);
-    const [selectedRod, setSelectedRod] = useState(rod);
+    const [selectedRod] = useState(rod);
 
     useEffect(() => {
         const unsubscribeFromTickUpdates = Game.getInstance().listenToTickEvents(() => {
@@ -27,6 +27,7 @@ export default function ReactorStatusComponent({rod}: {rod: FuelRod}) {
                 </div> 
                 <hr />
                 <div className="crt-text text-xl font-bold underline">FUEL ROD: {selectedRod.label} ({selectedRod.rodNumber})</div>
+                <div className="crt-text text-lg">FUEL LEVEL: {selectedRod.fuel} / {selectedRod.fuelCapacity}</div>
                 <div className="crt-text text-lg">TEMPERATURE: {selectedRod.temperature} ({selectedRod.maximumTemperature} MAX)</div>
                 <div className="crt-text text-lg">ROENTGEN: {selectedRod.roentgen} ({selectedRod.maximumRoentgen} MAX)</div>
                 <div className="crt-text text-lg">STATUS: {selectedRod.label ? selectedRod.status().name : ''}</div>

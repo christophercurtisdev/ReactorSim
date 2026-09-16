@@ -15,7 +15,7 @@ export default function ClockComponent() {
 
     let increments = [];
     for (let index = 0; index < 60; index++) {
-        increments.push(<div className={roundStarted ? "clock-increment text-xs text-neon-white transition-all" : "clock-increment text-xs text-unlit-neon transition-all"}>&#x2303;</div>);
+        increments.push(<div key={'clock-increment'+index} className={roundStarted ? "clock-increment text-xs text-neon-white transition-all" : "clock-increment text-xs text-unlit-neon transition-all"}>&#x2303;</div>);
     }
 
     const gameRound = Game.getInstance().getCurrentGameRound();

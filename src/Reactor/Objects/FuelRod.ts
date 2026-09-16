@@ -26,6 +26,7 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
     fuelArray: FuelArray;
 
     fuel: number;
+    fuelCapacity: number;
 
     private engaged: boolean = false;
 
@@ -45,6 +46,7 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
             this.rodNumber = rodNumber;
             this.label = label ?? fuelType.name.substring(0,1) + this.rodNumber;
             this.fuel = fuelType.defaultCapacity;
+            this.fuelCapacity = fuelType.defaultCapacity;
         } else {
             this.fuelType = null;
             this.label = null;
@@ -99,6 +101,7 @@ class FuelRod implements TemperatureSensitivity, Irradiation, Ticks {
     tick(): void {
         this.updateTemperature();
         this.updateRoentgen();
+        this.fuel -= 0.1;
     }
 
     hasExceededMaxRoentgen(): boolean {

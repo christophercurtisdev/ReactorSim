@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Game from '../../Core/Game';
 import FuelRod from '../../Reactor/Objects/FuelRod';
 import NixieHtmlEntity from '../Partials/NixieHtmlEntityComponent';
@@ -65,15 +65,36 @@ export default function FuelRodSwitchComponent({fuelRod, updateDetailsPanel, sel
     </div>
     );
 
+    const topOffsets = [
+        'top-0',
+        'top-1',
+        'top-2',
+        'top-3',
+        'top-4',
+        'top-5',
+        'top-6',
+        'top-7',
+        'top-8',
+        'top-9',
+        'top-10',
+        'top-11',
+        'top-12',
+        'top-13',
+    ];
+
+    let fuelIndicatorBarCount = 6;
+    let litFuelIndicatorBars = Math.ceil((fuelRod.fuel / fuelRod.fuelCapacity) * fuelIndicatorBarCount);
+    let fuelIndicatorBars = [];
+    for (let i = 1; i <= fuelIndicatorBarCount; i++) {
+        fuelIndicatorBars.push(<span className={'fuel-indicator-bar rounded border-4 border-t-mauve-900 border-l-mauve-900 border-b-mauve-700 border-r-mauve-700 w-4 '+ topOffsets[i*2] + (fuelIndicatorBarCount - i < litFuelIndicatorBars ? ' lit' : '')}></span>);
+    }
+
     return (
         <div className='flex flex-row-reverse justify-center items-center'>
             <div className="fuel-indicator">
-                <span className='fuel-indicator-bar rounded border-4 border-t-mauve-900 border-l-mauve-900 border-b-mauve-700 border-r-mauve-700 w-4 top-2'></span>
-                <span className='fuel-indicator-bar lit rounded border-4 border-t-mauve-900 border-l-mauve-900 border-b-mauve-700 border-r-mauve-700 w-4 top-4'></span>
-                <span className='fuel-indicator-bar lit rounded border-4 border-t-mauve-900 border-l-mauve-900 border-b-mauve-700 border-r-mauve-700 w-4 top-6'></span>
-                <span className='fuel-indicator-bar lit rounded border-4 border-t-mauve-900 border-l-mauve-900 border-b-mauve-700 border-r-mauve-700 w-4 top-8'></span>
-                <span className='fuel-indicator-bar lit rounded border-4 border-t-mauve-900 border-l-mauve-900 border-b-mauve-700 border-r-mauve-700 w-4 top-10'></span>
-                <span className='fuel-indicator-bar lit rounded border-4 border-t-mauve-900 border-l-mauve-900 border-b-mauve-700 border-r-mauve-700 w-4 top-12'></span>
+                {fuelIndicatorBars.map((bar, index) => (
+                    bar
+                ))}
             </div>
             <div className='w-16'>
                 <CRTCopmonent content={labelDisplay} border={false} vignette={false} />
